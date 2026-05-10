@@ -17,14 +17,14 @@ public class DatabaseConnection {
         this.connection = DriverManager.getConnection(URL); //takes url and opens a connection with the sql server
     }
 
-    private DatabaseConnection getInstance () throws SQLException {
+    public static DatabaseConnection getInstance () throws SQLException {
         if (instance == null || instance.connection.isClosed()) { //avoids opening two connections
             instance = new DatabaseConnection();
         }
         return instance;
     }
 
-    public connection getConnection(){
+    public Connection getConnection(){
         return connection;
     }
 
