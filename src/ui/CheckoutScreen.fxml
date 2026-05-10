@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
+            <children>
+                <VBox prefHeight="78.0" prefWidth="1096.0">
+                    <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
+                            <children>
+                                <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR " />
+                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
+                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
+                                <Button layoutX="286.0" layoutY="25.0" mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox prefHeight="135.0" prefWidth="1100.0" spacing="4.0" styleClass="page-header" stylesheets="@../Util/AppColors.css">
+                    <children>
+                        <Label styleClass="page-title" stylesheets="@../Util/AppColors.css" text="Checkout &amp; Folio" />
+                        <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Add / remove experiences · View itemised guest bill (join query)" />
+                    </children>
+                </VBox>
+                <HBox prefHeight="605.0" prefWidth="1100.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" maxWidth="550.0" minWidth="550.0" prefHeight="583.0" prefWidth="550.0" styleClass="left-col" stylesheets="@../Util/AppColors.css">
+                            <children>
+                                <Label prefWidth="206.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Add Experience" />
+                                  <VBox prefHeight="81.0" prefWidth="240.0">
+                                      <children>
+                                          <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="RESERVATION ID" />
+                                          <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. 1002" />
+                                      </children>
+                                  </VBox>
+                        <VBox prefHeight="81.0" prefWidth="240.0">
+                           <children>
+                              <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="EXPERIENCE" />
+                              <ComboBox prefHeight="47.0" prefWidth="539.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                           </children>
+                        </VBox>
+                                <HBox layoutX="38.0" layoutY="76.0" prefHeight="94.0" prefWidth="493.0" spacing="50.0">
+                                    <children>
+                                        <VBox prefHeight="81.0" prefWidth="240.0">
+                                            <children>
+                                                <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="CONCIERGE ID" />
+                                    <TextField styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. 5" />
+                                            </children>
+                                        </VBox>
+                                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="81.0" prefWidth="240.0">
+                                            <children>
+                                                <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="ACTUAL COST ($)" />
+                                    <TextField styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="33.0" prefWidth="379.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD TO FOLIO" />
+                                        <Pane layoutX="346.0" layoutY="10.0" prefHeight="59.0" prefWidth="25.0" />
+                                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="143.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
+                                        <Pane prefHeight="59.0" prefWidth="20.0" />
+                                        <Pane layoutX="211.0" layoutY="10.0" prefHeight="59.0" prefWidth="21.0" />
+                                    </children>
+                                </HBox>
+                                <Pane prefHeight="29.0" prefWidth="493.0" />
+                                <Label styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Remove Experience" />
+                                <TextField editable="false" prefHeight="29.0" prefWidth="493.0" styleClass="info-pill" stylesheets="@../Util/AppColors.css" text=" ⚠  Permanently removes the reservation" />
+                                <Label layoutX="10.0" layoutY="369.0" prefHeight="30.0" prefWidth="512.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="RES-EXPERIENCE ID" />
+                                <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. 88" />
+                                <Pane prefHeight="23.0" prefWidth="370.0" />
+                                <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="155.0" styleClass="btn-danger" stylesheets="@../Util/AppColors.css" text="X REMOVE" />
+                            </children>
+                        </VBox>
+                        <VBox maxWidth="550.0" minWidth="550.0" prefHeight="200.0" prefWidth="550.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
+                            <children>
+                                <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Guest Folio — Reservation #3019 (JOIN)" />
+                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <HBox prefHeight="100.0" prefWidth="494.0" />
+                                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                                    </children>
+                                </VBox>
+                            </children></VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>
