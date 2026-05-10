@@ -17,7 +17,7 @@ public class GuestScreen {
     @FXML private TextField updateIdField;
     @FXML private ComboBox<String> updateTierCombo;
 
-    @@FXML private TableView<Guest> guestTable;
+    @FXML private TableView<Guest> guestTable;
     @FXML private TableColumn<Guest, Integer> colId;
     @FXML private TableColumn<Guest, String> colName;
     @FXML private TableColumn<Guest, String> colEmail;
