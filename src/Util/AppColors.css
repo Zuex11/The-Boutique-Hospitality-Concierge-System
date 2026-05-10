@@ -1,0 +1,415 @@
+/* ── TOP NAV BAR ── */
+.top-nav {
+    -fx-background-color: #2a2420;
+    -fx-border-color: #3a3028;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 40 0 40;
+    -fx-pref-height: 56;
+    -fx-alignment: CENTER_LEFT;
+    -fx-spacing: 48;
+}
+
+.brand-label {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 20px;
+    -fx-font-style: italic;
+    -fx-text-fill: #d4af5a;
+}
+
+/* ── NAV TABS ── */
+.nav-tab {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: #7a6f62;
+    -fx-font-size: 15px;
+    -fx-font-weight: plain;
+    -fx-padding: 18 28 16 28;
+    -fx-cursor: hand;
+}
+.nav-tab:hover {
+    -fx-background-color: #35302a;
+    -fx-text-fill: #f5f0e8;
+}
+
+.nav-tab-active {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #b8973a transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: #d4af5a;
+    -fx-font-size: 15px;
+    -fx-font-weight: plain;
+    -fx-padding: 18 28 16 28;
+    -fx-cursor: hand;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+    -fx-background-color: white;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 22 40 18 40;
+    -fx-spacing: 5;
+}
+
+.page-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 30px;
+    -fx-text-fill: #1a1612;
+}
+
+.page-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7a6f62;
+}
+
+/* ── LEFT FORM COLUMN ── */
+.left-col {
+    -fx-background-color: white;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 28;
+    -fx-spacing: 0;
+}
+
+/* ── RIGHT COLUMN ── */
+.right-col {
+    -fx-background-color: #faf7f2;
+    -fx-padding: 28;
+    -fx-spacing: 0;
+}
+
+/* ── FORM SECTION TITLE ── */
+.form-section-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 20px;
+    -fx-font-weight: plain;
+    -fx-text-fill: #1a1612;
+    -fx-padding: 0 0 14 0;
+}
+
+/* ── FIELD LABELS ── */
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: plain;
+    -fx-text-fill: #7a6f62;
+    -fx-padding: 0 0 5 0;
+}
+
+/* ── TEXT FIELDS & COMBO BOXES ── */
+.field-input {
+    -fx-background-color: #f0ebe0;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-font-size: 13px;
+    -fx-text-fill: #1a1612;
+    -fx-padding: 9 12 9 12;
+}
+.field-input:focused {
+    -fx-border-color: #b8973a;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+    -fx-background-color: #b8973a;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: plain;
+    -fx-padding: 10 22 10 22;
+    -fx-background-radius: 3;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+.btn-primary:hover {
+    -fx-background-color: #d4af5a;
+}
+
+.btn-danger {
+    -fx-background-color: #8b2e2e;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 22 10 22;
+    -fx-background-radius: 3;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+.btn-danger:hover {
+    -fx-background-color: #a03535;
+}
+
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-text-fill: #7a6f62;
+    -fx-font-size: 15px;
+    -fx-padding: 9 18 9 18;
+    -fx-cursor: hand;
+}
+.btn-ghost:hover {
+    -fx-border-color: #b8973a;
+    -fx-text-fill: #1a1612;
+}
+
+/* ── SECTION LABEL (above tables/cards) ── */
+.section-label {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b8973a;
+    -fx-padding: 0 0 6 0;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);
+}
+
+.table-view .corner {
+    -fx-background-color: #2a2420;
+}
+
+.table-view > .virtual-flow > .clipped-container {
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 6 6;
+}
+
+.table-view > .virtual-flow {
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 6 6;
+}
+
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+}
+.table-view .column-header-background {
+    -fx-background-color: #2a2420;
+}
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #b8973a;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10;
+}
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #ddd5c4 transparent;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-pref-height: 40;
+}
+.table-view .table-row-cell:hover {
+    -fx-background-color: #fdf8ef;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: rgba(184,151,58,0.1);
+}
+.table-view .table-cell {
+    -fx-text-fill: #1a1612;
+    -fx-padding: 10;
+    -fx-border-color: transparent;
+}
+
+/* ── WARNING PILL ── */
+.info-pill {
+    -fx-background-color: rgba(184,151,58,0.1);
+    -fx-border-color: rgba(184,151,58,0.25);
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-text-fill: #8b6e20;
+    -fx-font-size: 12px;
+    -fx-padding: 6 12 6 12;
+}
+
+/* ── FORM DIVIDER ── */
+.form-divider {
+    -fx-background-color: #ddd5c4;
+    -fx-pref-height: 1;
+    -fx-max-width: 99999;
+}
+
+/* ── SUITE CARDS ── */
+.suite-card {
+    -fx-background-color: white;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 16;
+    -fx-spacing: 4;
+    -fx-cursor: hand;
+}
+.suite-card:hover {
+    -fx-border-color: #b8973a;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 8, 0, 0, 2);
+}
+.suite-card-selected {
+    -fx-background-color: rgba(184,151,58,0.05);
+    -fx-border-color: #b8973a;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 16;
+    -fx-spacing: 4;
+    -fx-cursor: hand;
+}
+.suite-number {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1612;
+}
+.suite-class-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7a6f62;
+}
+.suite-rate {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b8973a;
+}
+
+/* ── STATUS BADGES ── */
+.badge-available {
+    -fx-background-color: rgba(46,92,62,0.12);
+    -fx-text-fill: #2e5c3e;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10 3 10;
+}
+.badge-occupied {
+    -fx-background-color: rgba(139,46,46,0.1);
+    -fx-text-fill: #8b2e2e;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10 3 10;
+}
+.badge-active {
+    -fx-background-color: rgba(46,92,62,0.12);
+    -fx-text-fill: #2e5c3e;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10 3 10;
+}
+
+/* ── LOYALTY TIER BADGES ── */
+.badge-standard {
+    -fx-background-color: rgba(100,100,100,0.12);
+    -fx-text-fill: #555;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10 3 10;
+}
+.badge-silver {
+    -fx-background-color: rgba(150,150,160,0.15);
+    -fx-text-fill: #555;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10 3 10;
+}
+.badge-gold {
+    -fx-background-color: rgba(184,151,58,0.15);
+    -fx-text-fill: #8b6e20;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10 3 10;
+}
+.badge-platinum {
+    -fx-background-color: rgba(80,80,120,0.12);
+    -fx-text-fill: #445;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10 3 10;
+}
+
+/* ── FOLIO CARDS ── */
+.folio-card {
+    -fx-background-color: white;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 16 20 16 16;
+    -fx-spacing: 14;
+    -fx-alignment: CENTER_LEFT;
+}
+.folio-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1612;
+}
+.folio-meta {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7a6f62;
+}
+.folio-cost {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1612;
+}
+.btn-remove {
+    -fx-background-color: rgba(139,46,46,0.08);
+    -fx-border-color: rgba(139,46,46,0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-text-fill: #8b2e2e;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+}
+.btn-remove:hover {
+    -fx-background-color: #8b2e2e;
+    -fx-text-fill: white;
+}
+
+/* ── TOTAL BAR ── */
+.total-bar {
+    -fx-background-color: #2a2420;
+    -fx-background-radius: 6;
+    -fx-padding: 16 24 16 24;
+}
+.total-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9a9090;
+}
+.total-sub-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #5a504a;
+}
+.total-amount {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d4af5a;
+}
