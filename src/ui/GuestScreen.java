@@ -37,22 +37,22 @@ public class GuestScreen {
 
     @FXML public void initialize() throws SQLException {
 
-            tierCombo.setItems(FXCollections.observableArrayList("Standard", "Silver", "Gold", "Platinum"));
-            updateTierCombo.setItems(FXCollections.observableArrayList("Standard", "Silver", "Gold", "Platinum"));
+        tierCombo.setItems(FXCollections.observableArrayList("Standard", "Silver", "Gold", "Platinum"));
+        updateTierCombo.setItems(FXCollections.observableArrayList("Standard", "Silver", "Gold", "Platinum"));
 
-            colId.setCellValueFactory(new PropertyValueFactory<>("guestId"));
-            colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-            colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-            colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            colTier.setCellValueFactory(new PropertyValueFactory<>("loyaltyTier"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("guestId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        colTier.setCellValueFactory(new PropertyValueFactory<>("loyaltyTier"));
 
-            try{
-                guestDAO = new  GuestDAO();
-                loadAllGuests();
-            }
-            catch (SQLException e) {
-                 e.printStackTrace();
-            }
+        try{
+            guestDAO = new  GuestDAO();
+            loadAllGuests();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     private void loadAllGuests() throws SQLException
     {
@@ -61,18 +61,18 @@ public class GuestScreen {
         guestTable.setItems(observableList);
     }
     @FXML private void registerGuest() throws SQLException {
-            String name = nameField.getText();
-            String email = emailField.getText();
-            String phone = phoneField.getText();
-            String tier = tierCombo.getSelectionModel().getSelectedItem().toString();
+        String name = nameField.getText();
+        String email = emailField.getText();
+        String phone = phoneField.getText();
+        String tier = tierCombo.getSelectionModel().getSelectedItem().toString();
 
-            if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || tier.isEmpty()) {
-                showAlert("Please fill all the fields");
-                return;
-            }
-            Guest guest = new Guest(name, email, phone, tier);
-            guestDAO.insertGuest(guest);
-            clearGuest();
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || tier.isEmpty()) {
+            showAlert("Please fill all the fields");
+            return;
+        }
+        Guest guest = new Guest(name, email, phone, tier);
+        guestDAO.insertGuest(guest);
+        clearGuest();
 
     }
     @FXML private void clearGuest()

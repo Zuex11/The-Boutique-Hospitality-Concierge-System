@@ -81,13 +81,13 @@
                      <children>
                         <Label prefHeight="24.0" prefWidth="159.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="ALL REGISTERED GUESTS" />
                         <TableView fx:id="guestTable" prefHeight="401.0" prefWidth="503.0" stylesheets="@../Util/AppColors.css">
-                          <columns>
-                            <TableColumn fx:id="colId" text="ID" />
-                            <TableColumn fx:id="colName" prefWidth="111.0" text="NAME" />
+                           <columns>
+                              <TableColumn fx:id="colId" text="ID" />
+                              <TableColumn fx:id="colName" prefWidth="111.0" text="NAME" />
                               <TableColumn fx:id="colEmail" prefWidth="137.0" text="EMAIL" />
                               <TableColumn fx:id="colPhone" minWidth="0.0" prefWidth="77.0" text="PHONE" />
                               <TableColumn fx:id="colTier" prefWidth="87.0" text="TIER" />
-                          </columns>
+                           </columns>
                         </TableView>
                      </children></VBox>
                </children>
