@@ -27,10 +27,10 @@ public class ReservationDAO
         stmt.setDate(4, Date.valueOf(r.getCheckOut()));
         stmt.executeUpdate();
     }
-    public void cancelReservation(Reservation r) throws SQLException {
+    public void cancelReservation(int reservationId) throws SQLException {
         String sql = "DELETE FROM reservation WHERE reservation_id = ?";
         PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-        stmt.setInt(1, r.getReservationId());
+        stmt.setInt(1, reservationId);
         stmt.executeUpdate();
     }
     public List<Reservation> getReservationByGuest(int guestId) throws SQLException {
@@ -49,14 +49,30 @@ public class ReservationDAO
         }
         return reservations;
     }
+    public List<Reservation> getAllReservations() throws SQLException {
+        String sql = "SELECT * FROM reservation";
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        List<Reservation> list = new ArrayList<>();
+        while (rs.next()) {
+            Reservation r = new Reservation(
+                    rs.getInt("guest_id"),
+                    rs.getInt("suite_id"),
+                    rs.getDate("check_in").toLocalDate(),
+                    rs.getDate("check_out").toLocalDate()
+            );
+            list.add(r);
+        }
+        return list;
+    }
     public List<Suite> getAvailableSuites() throws SQLException {
     String sql = """
-        SELECT * FROM suite
-        EXCEPT
-        SELECT suite.suite_id, suite.hotel_id, suite.class_id, suite.suite_number
-        FROM suite
-        INNER JOIN reservation ON suite.suite_id = reservation.suite_id
-        WHERE check_out >= GETDATE()
+        SELECT s.suite_id, s.suite_number, sc.class_name, sc.nightly_rate
+        FROM suite s
+        INNER JOIN suite_class sc ON s.class_id = sc.class_id
+        WHERE s.suite_id NOT IN (
+            SELECT suite_id FROM reservation WHERE check_out >= GETDATE()
+        )
     """;
     List<Suite> list = new ArrayList<>();
     PreparedStatement stmt = db.getConnection().prepareStatement(sql);

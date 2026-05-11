@@ -24,7 +24,7 @@
     -fx-background-radius: 0;
     -fx-text-fill: #7a6f62;
     -fx-font-size: 15px;
-    -fx-font-weight: plain;
+    -fx-font-weight: normal;
     -fx-padding: 18 28 16 28;
     -fx-cursor: hand;
 }
@@ -40,7 +40,7 @@
     -fx-background-radius: 0;
     -fx-text-fill: #d4af5a;
     -fx-font-size: 15px;
-    -fx-font-weight: plain;
+    -fx-font-weight: normal;
     -fx-padding: 18 28 16 28;
     -fx-cursor: hand;
 }
@@ -85,7 +85,7 @@
 .form-section-title {
     -fx-font-family: "Georgia";
     -fx-font-size: 20px;
-    -fx-font-weight: plain;
+    -fx-font-weight: normal;
     -fx-text-fill: #1a1612;
     -fx-padding: 0 0 14 0;
 }
@@ -93,7 +93,7 @@
 /* ── FIELD LABELS ── */
 .field-label {
     -fx-font-size: 13px;
-    -fx-font-weight: plain;
+    -fx-font-weight: normal;
     -fx-text-fill: #7a6f62;
     -fx-padding: 0 0 5 0;
 }
@@ -118,7 +118,7 @@
     -fx-background-color: #b8973a;
     -fx-text-fill: white;
     -fx-font-size: 15px;
-    -fx-font-weight: plain;
+    -fx-font-weight: normal;
     -fx-padding: 10 22 10 22;
     -fx-background-radius: 3;
     -fx-border-width: 0;
