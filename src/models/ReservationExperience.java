@@ -1,6 +1,8 @@
 package models;
 
 
+import java.time.LocalDate;
+
 public class ReservationExperience {
     private int resExpId;
     private int experienceId;

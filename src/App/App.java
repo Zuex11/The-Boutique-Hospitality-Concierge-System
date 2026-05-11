@@ -17,7 +17,7 @@ public class App extends Application {
         stage.setWidth(1100);
         stage.setHeight(750);
         stage.setResizable(false);
-        showScreen("GuestScreen");
+        showScreen("ReservationScreen");
         stage.show();
     }
 

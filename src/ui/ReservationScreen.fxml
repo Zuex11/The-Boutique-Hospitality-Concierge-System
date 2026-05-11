@@ -3,14 +3,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ReservationScreen">
     <children>
         <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
             <children>
@@ -19,9 +22,9 @@
                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
                             <children>
                                 <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR " />
-                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
+                                <Button mnemonicParsing="false" onAction="#goGuest" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
                                 <Button mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
-                                <Button layoutX="286.0" layoutY="25.0" mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
+                                <Button layoutX="286.0" layoutY="25.0" mnemonicParsing="false" onAction="#goCheckout" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
                             </children>
                         </HBox>
                     </children>
@@ -42,13 +45,13 @@
                               <VBox prefHeight="81.0" prefWidth="240.0">
                                  <children>
                                             <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="GUEST ID" />
-                                            <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. 1002" />
+                                            <TextField fx:id="guestIDField" prefHeight="39.0" prefWidth="388.0" promptText="e.g. 1002" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                  </children>
                               </VBox>
                               <VBox layoutX="10.0" layoutY="10.0" prefHeight="81.0" prefWidth="240.0">
                                  <children>
                                     <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="SUITE ID" />
-                                    <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. 204" />
+                                    <TextField fx:id="suiteIDField" prefHeight="39.0" prefWidth="388.0" promptText="e.g. 204" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                  </children>
                               </VBox>
                            </children>
@@ -58,22 +61,22 @@
                               <VBox prefHeight="81.0" prefWidth="240.0">
                                  <children>
                                     <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="CHECK-IN DATE" />
-                                    <DatePicker styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                    <DatePicker fx:id="checkInDateField" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                  </children>
                               </VBox>
                               <VBox layoutX="10.0" layoutY="10.0" prefHeight="81.0" prefWidth="240.0">
                                  <children>
                                     <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="CHECK-OUT DATE" />
-                                    <DatePicker styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                    <DatePicker fx:id="checkOutDateField" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                                 <HBox prefHeight="33.0" prefWidth="379.0">
                                     <children>
-                                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ BOOK SUITE" />
+                                        <Button mnemonicParsing="false" onAction="#bookSuite" prefHeight="57.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ BOOK SUITE" />
                                         <Pane layoutX="346.0" layoutY="10.0" prefHeight="59.0" prefWidth="25.0" />
-                                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="143.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
+                                        <Button mnemonicParsing="false" onAction="#clearBook" prefHeight="59.0" prefWidth="143.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
                                         <Pane prefHeight="59.0" prefWidth="20.0" />
                                         <Pane layoutX="211.0" layoutY="10.0" prefHeight="59.0" prefWidth="21.0" />
                                     </children>
@@ -82,28 +85,30 @@
                                 <Label styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Cancel Reservation" />
                         <TextField editable="false" prefHeight="29.0" prefWidth="493.0" styleClass="info-pill" stylesheets="@../Util/AppColors.css" text=" ⚠  Permanently removes the reservation" />
                                 <Label layoutX="10.0" layoutY="369.0" prefHeight="37.0" prefWidth="102.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="RESERVATIOIN ID" />
-                                <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. 3021" />
+                                <TextField fx:id="ReservationIDField" prefHeight="39.0" prefWidth="388.0" promptText="e.g. 3021" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                 <Pane prefHeight="23.0" prefWidth="370.0" />
-                                <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="529.0" styleClass="btn-danger" stylesheets="@../Util/AppColors.css" text="X CANCEL RESERBATION" />
+                                <Button mnemonicParsing="false" onAction="#cancelReservation" prefHeight="45.0" prefWidth="529.0" styleClass="btn-danger" stylesheets="@../Util/AppColors.css" text="X CANCEL RESERVATION" />
                             </children>
                         </VBox>
                         <VBox maxWidth="550.0" minWidth="550.0" prefHeight="200.0" prefWidth="550.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
                      <children>
                         <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Available Suites — with Class &amp; Rate (JOIN)" />
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <HBox prefHeight="100.0" prefWidth="494.0" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" />
-                           </children>
-                        </VBox>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane fx:id="suiteGrid" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="477.0">
+                                 <children>
+                                    <FlowPane layoutX="52.0" prefHeight="200.0" prefWidth="200.0" />
+                                 </children></AnchorPane>
+                          </content>
+                        </ScrollPane>
                         <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Existing Reservations" />
-                        <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="existingReservations" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="RES ID" />
-                            <TableColumn prefWidth="75.0" text="GUEST" />
-                              <TableColumn prefWidth="75.0" text="SUITE" />
-                              <TableColumn prefWidth="75.0" text="CHECK-IN" />
-                              <TableColumn prefWidth="84.0" text="CHECK-OUT" />
+                            <TableColumn fx:id="colResId" prefWidth="67.0" text="RES ID" />
+                            <TableColumn fx:id="colGuestName" prefWidth="113.0" text="GUEST" />
+                              <TableColumn fx:id="colSuiteId" text="SUITE" />
+                              <TableColumn fx:id="colCheckIn" prefWidth="120.0" text="CHECK-IN" />
+                              <TableColumn fx:id="colCheckOut" prefWidth="110.0" text="CHECK-OUT" />
                           </columns>
                         </TableView>
                      </children></VBox>

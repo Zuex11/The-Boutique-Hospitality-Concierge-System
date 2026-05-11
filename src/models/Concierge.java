@@ -18,7 +18,7 @@ public class Concierge {
     public String getFullName() {
         return fullName;
     }
-    public void setFullName {
+    public void setFullName() {
         this.fullName = fullName;
     }
 }
