@@ -1,0 +1,130 @@
+create database Database_project ;
+
+create table hotel(
+    hotel_id INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    theme VARCHAR(255),
+    location VARCHAR(255),
+    total_suites INT
+);
+
+create table reservation_experience(
+    res_exp_id INT PRIMARY KEY,
+    reservation_id INT,
+    experience_id INT,
+    concierge_id INT,
+    actual_cost DECIMAL(10, 2),
+    booked_date DATE
+);
+
+create table reservation(
+    reservation_id INT PRIMARY KEY,
+    guest_id INT,
+    suite_id INT,
+    check_in DATE,
+    check_out DATE
+);
+
+create table guest(
+    guest_id INT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    loyalty_tier VARCHAR(50)
+);
+
+create table concierge(
+    concierge_id INT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    hotel_id INT
+);
+
+create table suite_class(
+    class_id INT PRIMARY KEY,
+    class_name VARCHAR(255) NOT NULL,
+    nightly_rate DECIMAL(10, 2),
+    amenities VARCHAR(255)
+);
+
+create table guest_experience(
+    experience_id INT PRIMARY KEY,
+    experience_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    base_cost DECIMAL(10, 2)
+);
+
+create table suite(
+    suite_id INT PRIMARY KEY,
+    hotel_id INT,
+    class_id INT,
+    suite_number VARCHAR(50)
+);
+
+-- Add foreign key for Suite table (references Hotel and Suite_Class)
+ALTER TABLE suite
+ADD CONSTRAINT fk_suite_hotel
+FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id);
+
+ALTER TABLE suite
+ADD CONSTRAINT fk_suite_class
+FOREIGN KEY (class_id) REFERENCES suite_class(class_id);
+
+-- Add foreign key for Concierge table (references Hotel)
+ALTER TABLE concierge
+ADD CONSTRAINT fk_concierge_hotel
+FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id);
+
+-- Add foreign key for Reservation table (references Guest and Suite)
+ALTER TABLE reservation
+ADD CONSTRAINT fk_reservation_guest
+FOREIGN KEY (guest_id) REFERENCES guest(guest_id);
+
+ALTER TABLE reservation
+ADD CONSTRAINT fk_reservation_suite
+FOREIGN KEY (suite_id) REFERENCES suite(suite_id);
+
+-- Add foreign keys for Reservation_Experience table (references Reservation, Guest_Experience, and Concierge)
+ALTER TABLE reservation_experience
+ADD CONSTRAINT fk_res_exp_reservation
+FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id);
+
+ALTER TABLE reservation_experience
+ADD CONSTRAINT fk_res_exp_experience
+FOREIGN KEY (experience_id) REFERENCES guest_experience(experience_id);
+
+ALTER TABLE reservation_experience
+ADD CONSTRAINT fk_res_exp_concierge
+FOREIGN KEY (concierge_id) REFERENCES concierge(concierge_id);
+
+-- Add status column to reservation (default 'confirmed' on insert)
+ALTER TABLE reservation
+ADD status VARCHAR(20) NOT NULL DEFAULT 'confirmed';
+
+-- Add total_cost column to reservation
+ALTER TABLE reservation
+ADD total_cost DECIMAL(10, 2);
+
+-- Add total_spend column to guest
+ALTER TABLE guest
+ADD total_spend DECIMAL(10, 2) DEFAULT 0.00;
+
+-- Create loyalty_tier_log table
+CREATE TABLE loyalty_tier_log (
+    log_id INT PRIMARY KEY IDENTITY(1,1),
+    guest_id INT NOT NULL,
+    old_tier VARCHAR(50),
+    new_tier VARCHAR(50),
+    changed_date DATE NOT NULL DEFAULT GETDATE(),
+    CONSTRAINT fk_log_guest FOREIGN KEY (guest_id) REFERENCES guest(guest_id)
+);
+
+CREATE TABLE users (
+    user_id     INT PRIMARY KEY IDENTITY(1,1),
+    username    VARCHAR(50)  NOT NULL UNIQUE,
+    password    VARCHAR(255) NOT NULL,
+    is_admin    BIT          NOT NULL DEFAULT 0
+);
+
+ALTER TABLE guest_experience
+ADD hotel_id INT NOT NULL
+CONSTRAINT fk_experience_hotel FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id);
