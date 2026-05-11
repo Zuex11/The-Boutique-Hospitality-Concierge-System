@@ -18,12 +18,19 @@ public class Suite{
     public int getClassId() {
         return classId;
     }
+
+    public void setSutieId(int sutieId) {
+        this.sutieId = sutieId;
+    }
+
     public int  getSutieId() {
         return sutieId;
     }
+
     public String getSuiteNumber() {
         return suiteNumber;
     }
+    
     public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
     }

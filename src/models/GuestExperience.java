@@ -6,7 +6,7 @@ public class GuestExperience{
     private String experienceName;
     private String description;
     private double baseCost;
-    public GuestExperience(String  fullName, String experienceName, String description, double baseCost) {
+    public GuestExperience(String experienceName, String description, double baseCost) {
         this.experienceName = experienceName;
         this.description = description;
         this.baseCost = baseCost;

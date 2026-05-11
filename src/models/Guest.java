@@ -3,6 +3,7 @@ package models;
 
 public class Guest{
     private int guestId;
+    private int totalSpend;
     private String fullName;
     private String email;
     private String phone;
@@ -14,6 +15,10 @@ public class Guest{
         this.loyaltyTier = loyaltyTier;
     }
 
+    public void setGuestId(int id)
+    {
+        this.guestId = id;
+    }
     public int getGuestId() {
         return guestId;
     }
@@ -40,5 +45,13 @@ public class Guest{
     }
     public void setloyaltyTier(String loyaltyTier) {
         this.loyaltyTier = loyaltyTier;
+    }
+    public void setTotalSpend(int spends)
+    {
+        this.totalSpend = spends;
+    }
+    public int getTotalSpend()
+    {
+        return this.totalSpend;
     }
 }
