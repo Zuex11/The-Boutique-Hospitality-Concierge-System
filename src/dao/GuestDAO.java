@@ -66,6 +66,14 @@ public class GuestDAO {
 
     }
 
+    public void updateTotalSpend(int guestId, double amount) throws SQLException {
+        String sql = "UPDATE guest SET total_spend = total_spend + ? WHERE guest_id = ?";
 
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        stmt.setDouble(1, amount);
+        stmt.setInt(2, guestId);
+
+        stmt.executeUpdate();
+    }
 
 }
