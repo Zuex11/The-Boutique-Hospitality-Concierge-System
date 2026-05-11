@@ -142,6 +142,5 @@ public class ReservationScreen
         alert.showAndWait();
     }
     @FXML private void goGuest() throws Exception { App.showScreen("GuestScreen"); }
-    @FXML private void goReservation() throws Exception { App.showScreen("ReservationScreen"); }
     @FXML private void goCheckout() throws Exception { App.showScreen("CheckoutScreen"); }
 }
