@@ -29,7 +29,7 @@ public class Reservation {
         return this.total_cost;
     }
 
-    setReservationId(int id)
+    public void setReservationId(int id)
     {
         this.reservationId = id;
     }

@@ -61,7 +61,7 @@
 }
 
 .page-subtitle {
-    -fx-font-size: 12px;
+    -fx-font-size: 15px;
     -fx-text-fill: #7a6f62;
 }
 
@@ -412,4 +412,75 @@
     -fx-font-size: 28px;
     -fx-font-weight: bold;
     -fx-text-fill: #d4af5a;
+}
+.reports-scroll {
+    -fx-background: #faf7f2;
+    -fx-background-color: #faf7f2;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.reports-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.reports-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #ddd5c4;
+    -fx-background-radius: 4px;
+}
+
+.reports-scroll .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.reports-scroll .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
+.reports-scroll .viewport {
+    -fx-background-color: #faf7f2;
+}
+
+.reports-scroll .corner {
+    -fx-background-color: transparent;
+}
+.report-section {
+    -fx-background-color: white;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 18 20 18 20;
+}
+
+.report-title {
+    -fx-font-family: 'Cormorant Garamond';
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1612;
+}
+
+.report-desc {
+    -fx-font-family: 'Jost';
+    -fx-font-size: 11px;
+    -fx-text-fill: #7a6f62;
+}
+
+.report-output {
+    -fx-background-color: #f0ebe0;
+    -fx-border-color: #ddd5c4;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-font-family: 'Jost';
+    -fx-font-size: 11.5px;
+    -fx-text-fill: #7a6f62;
+    -fx-prompt-text-fill: #7a6f62;
+    -fx-padding: 10 12 10 12;
+}
+
+.report-output .content {
+    -fx-background-color: #f0ebe0;
 }
