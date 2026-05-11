@@ -3,17 +3,16 @@ package dao;
 import db.DatabaseConnection;
 import models.Guest;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class GuestDAO {
-    private final DatabaseConnection db;
+    private DatabaseConnection db;
 
-    public GuestDAO() throws SQLException {
-        this.db = DatabaseConnection.getInstance();
+    public GuestDAO(DatabaseConnection db){
+        this.db = db ;
 
     }
 

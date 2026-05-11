@@ -10,7 +10,7 @@ import java.util.List;
 public class ExperienceDAO {
     private final DatabaseConnection db;
 
-    public ExperienceDAO() throws SQLException {
+    public ExperienceDAO() {
         this.db = DatabaseConnection.getInstance();
     }
 

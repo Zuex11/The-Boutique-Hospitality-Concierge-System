@@ -1,21 +1,12 @@
 package ui;
 
-import App.App;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import models.Guest;
 import dao.GuestDAO;
-import models.Reservation;
-
-import javafx.scene.control.TextField;
-import java.sql.SQLException;
-import java.util.List;
+import java.awt.*;
 
 public class GuestScreen {
     @FXML private TextField nameField;
@@ -93,7 +84,6 @@ public class GuestScreen {
         int guestId =  Integer.parseInt(updateIdField.getText());
         String tier = updateTierCombo.getSelectionModel().getSelectedItem().toString();
 
-        guestDAO.updateLoyalityTier(guestId, tier);
     }
     @FXML private void goReservation() throws Exception { App.showScreen("ReservationScreen"); }
     @FXML private void goCheckout() throws Exception { App.showScreen("CheckoutScreen"); }
