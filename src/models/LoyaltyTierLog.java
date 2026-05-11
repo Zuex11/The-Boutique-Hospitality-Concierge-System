@@ -8,13 +8,13 @@ public class LoyaltyTierLog {
     private int guestId;
     private String oldTier;
     private String newTier;
-    private String changedDate;
+    private LocalDate changedDate;
 
     public LoyaltyTierLog(int guestId, String oldTier, String newTier) {
         this.guestId = guestId;
         this.oldTier = oldTier;
         this.newTier = newTier;
-        this.changedDate = LocalDate.now().toString();
+        this.changedDate = LocalDate.now();
     }
 
     public int getLogId() 
@@ -37,7 +37,7 @@ public class LoyaltyTierLog {
     { 
         return newTier; 
     }
-    public String getChangedDate() 
+    public LocalDate getChangedDate() 
     { 
         return changedDate; 
     }
