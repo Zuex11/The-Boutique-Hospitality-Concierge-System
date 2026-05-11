@@ -9,10 +9,10 @@ import java.util.List;
 
 
 public class GuestDAO {
-    private DatabaseConnection db;
+    private final DatabaseConnection db;
 
-    public GuestDAO(DatabaseConnection db){
-        this.db = db ;
+    public GuestDAO() throws SQLException {
+        this.db = DatabaseConnection.getInstance() ;
 
     }
 

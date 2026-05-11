@@ -1,12 +1,16 @@
 package ui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import models.Guest;
 import dao.GuestDAO;
-import java.awt.*;
+import java.util.List;
+
+import App.App;
+import java.sql.SQLException;
 
 public class GuestScreen {
     @FXML private TextField nameField;

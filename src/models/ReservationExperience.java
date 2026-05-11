@@ -11,7 +11,7 @@ public class ReservationExperience {
     private double actualCost;
     private LocalDate bookedDate;
     public ReservationExperience(int reservationId, int experienceId, int coniergeId, double actualCost, LocalDate bookedDate) {
-        this.resExpId = reservationId;
+        this.reservationId = reservationId;
         this.experienceId = experienceId;
         this.coniergeId = coniergeId;
         this.actualCost = actualCost;
@@ -29,7 +29,7 @@ public class ReservationExperience {
         return experienceId;
     }
 
-    public int getConiergeId() {
+    public int getConciergeId() {
         return coniergeId;
     }
     public double getActualCost() {
@@ -40,5 +40,9 @@ public class ReservationExperience {
     }
     public LocalDate getBookedDate() {
         return bookedDate;
+    }
+
+    public void setResExpId(int resExpId) {
+        this.resExpId = resExpId;
     }
 }
