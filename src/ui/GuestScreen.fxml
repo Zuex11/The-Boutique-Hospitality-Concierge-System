@@ -80,14 +80,14 @@
                   <VBox maxWidth="550.0" minWidth="550.0" prefHeight="200.0" prefWidth="550.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="159.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="ALL REGISTERED GUESTS" />
-                        <TableView prefHeight="401.0" prefWidth="503.0" stylesheets="@../Util/AppColors.css">
-                          <columns>
-                            <TableColumn text="ID" />
-                            <TableColumn prefWidth="111.0" text="NAME" />
-                              <TableColumn prefWidth="137.0" text="EMAIL" />
-                              <TableColumn minWidth="0.0" prefWidth="122.0" text="PHONE" />
-                              <TableColumn prefWidth="240.0" text="TIER" />
-                          </columns>
+                        <TableView fx:id="guestTable" prefHeight="401.0" prefWidth="503.0" stylesheets="@../Util/AppColors.css">
+                           <columns>
+                              <TableColumn fx:id="colId" text="ID" />
+                              <TableColumn fx:id="colName" prefWidth="111.0" text="NAME" />
+                              <TableColumn fx:id="colEmail" prefWidth="137.0" text="EMAIL" />
+                              <TableColumn fx:id="colPhone" minWidth="0.0" prefWidth="77.0" text="PHONE" />
+                              <TableColumn fx:id="colTier" prefWidth="87.0" text="TIER" />
+                           </columns>
                         </TableView>
                      </children></VBox>
                </children>
