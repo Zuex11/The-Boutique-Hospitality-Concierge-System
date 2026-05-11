@@ -285,4 +285,32 @@ public class HotelDAO {
         }
         return hotels;
     }
+
+    public List<GuestExperience> getExperiencesByHotel(int hotelId) throws SQLException {
+        String sql = """
+            SELECT ge.experience_id, ge.hotel_id, ge.experience_name, ge.description, ge.base_cost
+            FROM guest_experience ge
+            WHERE ge.hotel_id = ?
+            ORDER BY ge.experience_name
+        """;
+        
+        List<GuestExperience> experiences = new ArrayList<>();
+        
+        try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
+            stmt.setInt(1, hotelId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                GuestExperience experience = new GuestExperience(
+                    rs.getInt("hotel_id"),
+                    rs.getString("experience_name"),
+                    rs.getString("description"),
+                    rs.getDouble("base_cost")
+                );
+                experience.setExperienceId(rs.getInt("experience_id"));
+                experiences.add(experience);
+            }
+        }
+        return experiences;
+    }
 }
