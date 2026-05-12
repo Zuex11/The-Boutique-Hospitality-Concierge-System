@@ -26,12 +26,12 @@
                                     <content>
                                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
                                             <children>
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
+                                                <Button mnemonicParsing="false" onAction="#goGuest" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
                                                 <Button mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="HOTELS &amp; SUITES" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CONCIERGE" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="REPORTS" />
+                                                <Button mnemonicParsing="false" onAction="#goCheckout" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
+                                                <Button mnemonicParsing="false" onAction="#goHotelSuite" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="HOTELS &amp; SUITES" />
+                                                <Button mnemonicParsing="false" onAction="#goConcierge" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CONCIERGE" />
+                                                <Button mnemonicParsing="false" onAction="#goReports" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="REPORTS" />
                                             </children>
                                         </HBox>
                                     </content>

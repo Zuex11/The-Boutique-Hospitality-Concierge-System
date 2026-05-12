@@ -1,6 +1,7 @@
 package dao;
 
 import db.DatabaseConnection;
+import models.GuestExperience;
 import models.ReservationExperience;
 
 import java.sql.*;
