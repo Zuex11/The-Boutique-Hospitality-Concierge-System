@@ -14,25 +14,46 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="750.0" prefWidth="1100.0"
+      stylesheets="@../Util/AppColors.css"
+      xmlns="http://javafx.com/javafx/26"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ui.ConciergeScreen">
     <children>
         <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
             <children>
+
+                <!-- ── TOP NAV ── -->
                 <VBox prefHeight="78.0" prefWidth="1096.0">
                     <children>
                         <HBox prefHeight="56.0" prefWidth="1100.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
                             <children>
                                 <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR / Concierge System" />
-                                <ScrollPane styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" fitToHeight="true" vbarPolicy="NEVER" hbarPolicy="AS_NEEDED" HBox.hgrow="ALWAYS">
+                                <ScrollPane styleClass="nav-scroll" stylesheets="@../Util/AppColors.css"
+                                            fitToHeight="true" vbarPolicy="NEVER" hbarPolicy="AS_NEEDED"
+                                            HBox.hgrow="ALWAYS">
                                     <content>
                                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
                                             <children>
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="HOTELS &amp; SUITES" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="CONCIERGE" />
-                                                <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="REPORTS" />
+                                                <Button mnemonicParsing="false" onAction="#goGuest"
+                                                        styleClass="nav-tab" stylesheets="@../Util/AppColors.css"
+                                                        text="GUEST REGISTRY" />
+                                                <Button mnemonicParsing="false" onAction="#goReservation"
+                                                        styleClass="nav-tab" stylesheets="@../Util/AppColors.css"
+                                                        text="RESERVATIONS" />
+                                                <Button mnemonicParsing="false" onAction="#goCheckout"
+                                                        styleClass="nav-tab" stylesheets="@../Util/AppColors.css"
+                                                        text="CHECKOUT &amp; FOLIO" />
+                                                <Button mnemonicParsing="false" onAction="#goHotelSuite"
+                                                        styleClass="nav-tab" stylesheets="@../Util/AppColors.css"
+                                                        text="HOTELS &amp; SUITES" />
+                                                <Button mnemonicParsing="false" onAction="#goConcierge"
+                                                        styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css"
+                                                        text="CONCIERGE" />
+                                                <Button mnemonicParsing="false" onAction="#goReports"
+                                                        styleClass="nav-tab" stylesheets="@../Util/AppColors.css"
+                                                        text="REPORTS" />
                                             </children>
                                         </HBox>
                                     </content>
@@ -41,100 +62,165 @@
                         </HBox>
                     </children>
                 </VBox>
-                <VBox prefHeight="135.0" prefWidth="1100.0" spacing="4.0" styleClass="page-header" stylesheets="@../Util/AppColors.css">
+
+                <!-- ── PAGE HEADER ── -->
+                <VBox prefHeight="135.0" prefWidth="1100.0" spacing="4.0"
+                      styleClass="page-header" stylesheets="@../Util/AppColors.css">
                     <children>
-                        <Label styleClass="page-title" stylesheets="@../Util/AppColors.css" text="Concierge Staff" />
-                        <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Register concierge staff and assign them to a hotel property" />
+                        <Label styleClass="page-title" stylesheets="@../Util/AppColors.css"
+                               text="Concierge Staff" />
+                        <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css"
+                               text="Register concierge staff and assign them to a hotel property" />
                     </children>
                 </VBox>
+
+                <!-- ── BODY ── -->
                 <HBox prefHeight="605.0" prefWidth="1100.0">
                     <children>
-                  <ScrollPane prefHeight="581.0" prefWidth="437.0" styleClass="reports-scroll" stylesheets="@../Util/AppColors.css">
-                     <content>
-                              <VBox alignment="CENTER_LEFT" maxWidth="550.0" minWidth="432.0" prefHeight="561.0" prefWidth="432.0" spacing="10.0" styleClass="left-col" stylesheets="@../Util/AppColors.css">
-                                  <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                                 <children>
-                                            <Label prefWidth="206.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Add Concierge" />
-                                            <VBox prefHeight="81.0" prefWidth="240.0">
-                                                <children>
-                                                    <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="FULL NAME" />
-                                                    <TextField prefHeight="39.0" prefWidth="388.0" promptText="e.g. Mahmoud Ehab" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
-                                                </children>
-                                            </VBox>
-                                            <VBox prefHeight="81.0" prefWidth="240.0">
-                                                <children>
-                                                    <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="ASSIGNED HOTEL" />
-                                                    <ComboBox prefHeight="47.0" prefWidth="539.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
-                                                </children>
-                                            </VBox>
-                                            <HBox prefHeight="33.0" prefWidth="379.0">
-                                                <children>
-                                                    <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD CONCIERGE" />
-                                                    <Pane layoutX="346.0" layoutY="10.0" prefHeight="59.0" prefWidth="25.0" />
-                                                    <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="143.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
-                                                    <Pane prefHeight="59.0" prefWidth="20.0" />
-                                                    <Pane layoutX="211.0" layoutY="10.0" prefHeight="59.0" prefWidth="21.0" />
-                                                </children>
-                                            </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="178.0" prefWidth="375.0" spacing="10.0">
-                                 <children>
-                                    <Label lineSpacing="10.0" prefWidth="206.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Delete Concierge">
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="CONCIERGE ID" />
-                                    <TextField prefHeight="39.0" prefWidth="388.0" promptText="e.g. 123" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
-                                    <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="374.0" styleClass="btn-danger" stylesheets="@../Util/AppColors.css" text="DELETE CONCIERGE" />
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="20.0" top="20.0" />
-                                 </padding>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="field-input" stylesheets="@../Util/AppColors.css">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="suite-class-label" text="STAFF OVERVIEW">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="field-label" text="Hotels Staffed" wrappingWidth="267.79296875" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="field-label" text="num" />
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="field-label" text="Total Concierges" wrappingWidth="269.62109375" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="field-label" text="num" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                                  </children>
-                           <padding>
-                              <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
-                           </padding>
-                              </VBox>
-                     </content>
-                  </ScrollPane>
-                        <VBox maxWidth="669.0" minWidth="550.0" prefHeight="581.0" prefWidth="630.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
+
+                        <!-- LEFT COLUMN: forms + staff overview -->
+                        <ScrollPane prefHeight="581.0" prefWidth="437.0"
+                                    styleClass="reports-scroll" stylesheets="@../Util/AppColors.css">
+                            <content>
+                                <VBox alignment="CENTER_LEFT" maxWidth="550.0" minWidth="432.0"
+                                      prefHeight="561.0" prefWidth="432.0" spacing="10.0"
+                                      styleClass="left-col" stylesheets="@../Util/AppColors.css">
+                                    <children>
+
+                                        <!-- ADD CONCIERGE -->
+                                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                            <children>
+                                                <Label prefWidth="206.0" styleClass="form-section-title"
+                                                       stylesheets="@../Util/AppColors.css" text="Add Concierge" />
+
+                                                <VBox prefHeight="81.0" prefWidth="240.0">
+                                                    <children>
+                                                        <Label prefWidth="206.0" styleClass="field-label"
+                                                               stylesheets="@../Util/AppColors.css" text="FULL NAME" />
+                                                        <TextField fx:id="nameField" prefHeight="39.0" prefWidth="388.0"
+                                                                   promptText="e.g. Mahmoud Ehab"
+                                                                   styleClass="field-input"
+                                                                   stylesheets="@../Util/AppColors.css" />
+                                                    </children>
+                                                </VBox>
+
+                                                <VBox prefHeight="81.0" prefWidth="240.0">
+                                                    <children>
+                                                        <Label prefWidth="206.0" styleClass="field-label"
+                                                               stylesheets="@../Util/AppColors.css" text="ASSIGNED HOTEL" />
+                                                        <ComboBox fx:id="hotelCombo" prefHeight="47.0" prefWidth="539.0"
+                                                                  styleClass="field-input"
+                                                                  stylesheets="@../Util/AppColors.css" />
+                                                    </children>
+                                                </VBox>
+
+                                                <HBox prefHeight="33.0" prefWidth="379.0">
+                                                    <children>
+                                                        <Button mnemonicParsing="false" onAction="#addConcierge"
+                                                                prefHeight="57.0" prefWidth="219.0"
+                                                                styleClass="btn-primary"
+                                                                stylesheets="@../Util/AppColors.css"
+                                                                text="+ ADD CONCIERGE" />
+                                                        <Pane prefHeight="59.0" prefWidth="25.0" />
+                                                        <Button mnemonicParsing="false" onAction="#clearAdd"
+                                                                prefHeight="59.0" prefWidth="143.0"
+                                                                styleClass="btn-ghost"
+                                                                stylesheets="@../Util/AppColors.css"
+                                                                text="CLEAR" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- DELETE CONCIERGE -->
+                                        <VBox prefHeight="178.0" prefWidth="375.0" spacing="10.0">
+                                            <padding>
+                                                <Insets bottom="10.0" top="20.0" />
+                                            </padding>
+                                            <children>
+                                                <Label lineSpacing="10.0" prefWidth="206.0"
+                                                       styleClass="form-section-title"
+                                                       stylesheets="@../Util/AppColors.css"
+                                                       text="Delete Concierge">
+                                                    <padding>
+                                                        <Insets bottom="4.0" />
+                                                    </padding>
+                                                </Label>
+                                                <Label prefWidth="206.0" styleClass="field-label"
+                                                       stylesheets="@../Util/AppColors.css" text="CONCIERGE ID" />
+                                                <TextField fx:id="deleteIdField" prefHeight="39.0" prefWidth="388.0"
+                                                           promptText="e.g. 123"
+                                                           styleClass="field-input"
+                                                           stylesheets="@../Util/AppColors.css" />
+                                                <Button mnemonicParsing="false" onAction="#deleteConcierge"
+                                                        prefHeight="53.0" prefWidth="374.0"
+                                                        styleClass="btn-danger"
+                                                        stylesheets="@../Util/AppColors.css"
+                                                        text="DELETE CONCIERGE" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- STAFF OVERVIEW -->
+                                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0"
+                                              styleClass="field-input" stylesheets="@../Util/AppColors.css">
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                      styleClass="suite-class-label" text="STAFF OVERVIEW">
+                                                    <font>
+                                                        <Font size="18.0" />
+                                                    </font>
+                                                </Text>
+                                                <HBox prefHeight="30.0" prefWidth="200.0">
+                                                    <children>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                              styleClass="field-label" text="Hotels Staffed"
+                                                              wrappingWidth="267.0" />
+                                                        <Text fx:id="hotelsStaffedText" strokeType="OUTSIDE"
+                                                              strokeWidth="0.0" styleClass="field-label"
+                                                              text="—" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox prefHeight="30.0" prefWidth="200.0">
+                                                    <children>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                              styleClass="field-label" text="Total Concierges"
+                                                              wrappingWidth="269.0" />
+                                                        <Text fx:id="totalConciergesText" strokeType="OUTSIDE"
+                                                              strokeWidth="0.0" styleClass="field-label"
+                                                              text="—" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
+                                    </padding>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+
+                        <!-- RIGHT COLUMN: table -->
+                        <VBox maxWidth="669.0" minWidth="550.0" prefHeight="581.0" prefWidth="630.0"
+                              styleClass="right-col" stylesheets="@../Util/AppColors.css">
                             <children>
-                                <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="All Concierges" />
-                        <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
-                          <columns>
-                            <TableColumn prefWidth="107.0" text="ID" />
-                            <TableColumn prefWidth="184.0" text="FULL NAME" />
-                              <TableColumn prefWidth="201.0" text="HOTEL" />
-                          </columns>
-                        </TableView>
-                            </children></VBox>
+                                <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label"
+                                       stylesheets="@../Util/AppColors.css" text="All Concierges" />
+                                <TableView fx:id="conciergeTable" prefHeight="200.0" prefWidth="200.0"
+                                           stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colId"    prefWidth="107.0" text="ID" />
+                                        <TableColumn fx:id="colName"  prefWidth="184.0" text="FULL NAME" />
+                                        <TableColumn fx:id="colHotel" prefWidth="201.0" text="HOTEL ID" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+
                     </children>
                 </HBox>
+
             </children>
         </VBox>
     </children>
