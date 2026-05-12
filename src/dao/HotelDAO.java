@@ -312,4 +312,40 @@ public class HotelDAO {
         }
         return experiences;
     }
+    public void insertSuiteClass(SuiteClass sc) throws SQLException {
+        String sql = "INSERT INTO suite_class (hotel_id, class_name, nightly_rate, amenities) VALUES (?, ?, ?, ?)";
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        stmt.setInt(1, sc.getHotelId());
+        stmt.setString(2, sc.getClassName());
+        stmt.setDouble(3, sc.getNightlyRate());
+        stmt.setString(4, sc.getAmenities());
+        stmt.executeUpdate();
+    }
+
+    public void insertSuite(Suite suite) throws SQLException {
+        String sql = "INSERT INTO suite (hotel_id, class_id, suite_number) VALUES (?, ?, ?)";
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        stmt.setInt(1, suite.getHotelId());
+        stmt.setInt(2, suite.getClassId());
+        stmt.setString(3, suite.getSuiteNumber());
+        stmt.executeUpdate();
+    }
+
+    public List<SuiteClass> getAllSuiteClasses() throws SQLException {
+        String sql = "SELECT * FROM suite_class ORDER BY class_id";
+        List<SuiteClass> list = new ArrayList<>();
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            SuiteClass sc = new SuiteClass(
+                    rs.getInt("hotel_id"),
+                    rs.getString("class_name"),
+                    rs.getDouble("nightly_rate"),
+                    rs.getString("amenities")
+            );
+            sc.setClassId(rs.getInt("class_id"));
+            list.add(sc);
+        }
+        return list;
+    }
 }

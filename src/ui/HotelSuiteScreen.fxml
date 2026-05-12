@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.HotelSuiteScreen">
    <children>
       <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
          <children>
@@ -23,12 +23,12 @@
                      <content>
                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
                            <children>
-                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
-                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
-                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
+                              <Button mnemonicParsing="false" onAction="#goGuest" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
+                              <Button mnemonicParsing="false" onAction="#goReservation" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
+                              <Button mnemonicParsing="false" onAction="#goCheckout" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
                               <Button mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="HOTELS &amp; SUITES" />
-                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CONCIERGE" />
-                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="REPORTS" />
+                              <Button mnemonicParsing="false" onAction="#goConcierge" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CONCIERGE" />
+                              <Button mnemonicParsing="false" onAction="#goReports" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="REPORTS" />
                            </children>
                         </HBox>
                      </content>
@@ -87,8 +87,8 @@
                                     <HBox spacing="10.0">
                                        <padding><Insets top="10.0" /></padding>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="201.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD HOTEL" />
-                                          <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="86.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
+                                          <Button mnemonicParsing="false" onAction="#handleAddHotel" prefHeight="41.0" prefWidth="201.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD HOTEL" />
+                                          <Button mnemonicParsing="false" onAction="#handleClearHotel" prefHeight="41.0" prefWidth="86.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -124,8 +124,8 @@
                                     <HBox spacing="10.0">
                                        <padding><Insets top="10.0" /></padding>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="201.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD CLASS" />
-                                          <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="86.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
+                                          <Button mnemonicParsing="false" onAction="#handleAddClass" prefHeight="41.0" prefWidth="201.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD CLASS" />
+                                          <Button mnemonicParsing="false" onAction="#handleClearClass" prefHeight="41.0" prefWidth="86.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -139,7 +139,7 @@
                                     <VBox spacing="5.0">
                                        <children>
                                           <Label styleClass="field-label" stylesheets="@../Util/AppColors.css" text="HOTEL" />
-                                          <ComboBox fx:id="suiteHotelCombo" maxWidth="99999.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                          <ComboBox fx:id="suiteHotelCombo" onAction="#handleHotelSelected" maxWidth="99999.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0">
@@ -157,8 +157,8 @@
                                     <HBox spacing="10.0">
                                        <padding><Insets top="10.0" /></padding>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="201.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD SUITE" />
-                                          <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="86.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
+                                          <Button mnemonicParsing="false" onAction="#handleAddSuite" prefHeight="41.0" prefWidth="201.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ ADD SUITE" />
+                                          <Button mnemonicParsing="false" onAction="#handleClearSuite" prefHeight="41.0" prefWidth="86.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
                                        </children>
                                     </HBox>
                                  </children>
