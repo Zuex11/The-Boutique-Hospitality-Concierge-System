@@ -21,4 +21,5 @@ public class Concierge {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+    public void setConciergeId(int id) {this.conciergeId = id;}
 }
