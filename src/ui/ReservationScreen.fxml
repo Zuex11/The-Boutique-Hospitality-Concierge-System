@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.geometry.Insets?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ReservationScreen">
     <children>
         <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
@@ -104,14 +105,14 @@
                         <VBox maxWidth="550.0" minWidth="550.0" prefHeight="200.0" prefWidth="550.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
                      <children>
                         <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Available Suites — with Class &amp; Rate (JOIN)" />
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                          <content>
-                            <AnchorPane fx:id="suiteGrid" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="477.0">
-                                 <children>
-                                    <FlowPane layoutX="52.0" prefHeight="200.0" prefWidth="200.0" />
-                                 </children></AnchorPane>
-                          </content>
-                        </ScrollPane>
+                         <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                                     styleClass="reports-scroll" stylesheets="@../Util/AppColors.css">
+                             <content>
+                                 <FlowPane fx:id="suiteGrid" hgap="10" vgap="10" prefWrapLength="490">
+                                     <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+                                 </FlowPane>
+                             </content>
+                         </ScrollPane>
                         <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Existing Reservations" />
                         <TableView fx:id="existingReservations" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
                           <columns>

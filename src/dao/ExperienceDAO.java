@@ -129,12 +129,11 @@ public class ExperienceDAO {
     public List<ReservationExperience> getExperiencesByReservation(int resId) {
         List<ReservationExperience> experiences = new ArrayList<>();
         String sql = """
-                    SELECT re.res_exp_id, re.reservation_id, re.experience_id,
-                           re.concierge_id, re.actual_cost, re.booked_date
-                    FROM ReservationExperience re
-                    JOIN GuestExperience ge ON re.experience_id = ge.experience_id
-                    WHERE re.reservation_id = ?
-                    ORDER BY re.booked_date DESC
+                    SELECT res_exp_id, reservation_id, experience_id,
+                                                           concierge_id, actual_cost, booked_date
+                                                    FROM reservation_experience
+                                                    WHERE reservation_id = ?
+                                                    ORDER BY booked_date DESC
                 """;
 
         try (Connection conn = db.getConnection();
