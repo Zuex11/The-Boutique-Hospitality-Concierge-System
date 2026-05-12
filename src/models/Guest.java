@@ -22,10 +22,10 @@ public class Guest{
     public int getGuestId() {
         return guestId;
     }
-    public String getfullName() {
+    public String getFullName() {
         return fullName;
     }
-    public void setfullName(String fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
     public String getPhone() {
@@ -40,10 +40,10 @@ public class Guest{
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getloyaltyTier() {
+    public String getLoyaltyTier() {
         return loyaltyTier;
     }
-    public void setloyaltyTier(String loyaltyTier) {
+    public void setLoyaltyTier(String loyaltyTier) {
         this.loyaltyTier = loyaltyTier;
     }
     public void setTotalSpend(int spends)

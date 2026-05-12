@@ -2,7 +2,7 @@ package models;
 
 
 public class Suite{
-    private int sutieId;
+    private int suiteId;
     private int hotelId;
     private int classId;
     private String suiteNumber;
@@ -19,12 +19,12 @@ public class Suite{
         return classId;
     }
 
-    public void setSutieId(int sutieId) {
-        this.sutieId = sutieId;
+    public void setSuiteId(int suiteId) {
+        this.suiteId = suiteId;
     }
 
-    public int  getSutieId() {
-        return sutieId;
+    public int  getSuiteId() {
+        return suiteId;
     }
 
     public String getSuiteNumber() {
