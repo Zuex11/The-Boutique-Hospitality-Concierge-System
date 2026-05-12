@@ -21,10 +21,10 @@ public class GuestDAO {
         String sql = "INSERT INTO guest (full_name ,email ,phone ,loyalty_tier) VALUES (?,?,?,?)";
 
         PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-        stmt.setString(1, guest.getfullName());
+        stmt.setString(1, guest.getFullName());
         stmt.setString(2, guest.getEmail());
         stmt.setString(3, guest.getPhone());
-        stmt.setString(4, guest.getloyaltyTier());
+        stmt.setString(4, guest.getLoyaltyTier());
 
         stmt.executeUpdate();
         
@@ -59,6 +59,7 @@ public class GuestDAO {
                 result_set.getString("loyalty_tier")
                 
             );
+            guest.setGuestId(result_set.getInt("guest_id"));
             guests.add(guest);
         }
 

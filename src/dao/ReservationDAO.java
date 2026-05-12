@@ -35,18 +35,25 @@ public class ReservationDAO {
 
     public List<Reservation> getAllReservations() throws SQLException {
         String sql = "SELECT * FROM reservation";
-        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
+
         List<Reservation> list = new ArrayList<>();
-        while (rs.next()) {
-            Reservation r = new Reservation(
-                rs.getInt("guest_id"),
-                rs.getInt("suite_id"),
-                rs.getDate("check_in").toLocalDate(),
-                rs.getDate("check_out").toLocalDate()
-            );
-            list.add(r);
+
+        try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Reservation r = new Reservation(
+                        rs.getInt("guest_id"),
+                        rs.getInt("suite_id"),
+                        rs.getDate("check_in").toLocalDate(),
+                        rs.getDate("check_out").toLocalDate()
+                );
+                r.setReservationId(rs.getInt("reservation_id"));
+                r.statusSetter(rs.getString("status"));
+                r.totalCostSetter(rs.getInt("total_cost"));
+                list.add(r);
+            }
         }
+
         return list;
     }
 
@@ -69,24 +76,30 @@ public class ReservationDAO {
 
     public List<Suite> getAvailableSuites() throws SQLException {
         String sql = """
-            SELECT s.suite_id, s.suite_number, sc.class_name, sc.nightly_rate
-            FROM suite s
-            INNER JOIN suite_class sc ON s.class_id = sc.class_id
-            WHERE s.suite_id NOT IN (
-                SELECT suite_id FROM reservation WHERE check_out >= GETDATE()
-            )
-        """;
+        SELECT s.suite_id, s.suite_number, s.hotel_id, s.class_id,
+               sc.class_name, sc.nightly_rate
+        FROM suite s
+        INNER JOIN suite_class sc ON s.class_id = sc.class_id
+        WHERE s.suite_id NOT IN (
+            SELECT suite_id FROM reservation WHERE check_out >= GETDATE()
+        )
+    """;
+
         List<Suite> list = new ArrayList<>();
-        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            Suite s = new Suite(
-                rs.getInt("hotel_id"),
-                rs.getInt("class_id"),
-                rs.getString("suite_number")
-            );
-            list.add(s);
+
+        try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Suite s = new Suite(
+                        rs.getInt("hotel_id"),
+                        rs.getInt("class_id"),
+                        rs.getString("suite_number")
+                );
+                s.setSuiteeId(rs.getInt("suite_id"));
+                list.add(s);
+            }
         }
+
         return list;
     }
 }

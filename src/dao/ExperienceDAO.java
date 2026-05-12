@@ -93,6 +93,38 @@ public class ExperienceDAO {
      * Get all experiences booked for a specific reservation
      * Covers: Select using joins (with GuestExperience and Concierge tables)
      */
+    public List<GuestExperience> getAvailableExperiencesForReservation(int reservationId) throws SQLException {
+        String sql = """
+        SELECT ge.experience_id, ge.experience_name, ge.base_cost
+        FROM guest_experience ge
+        WHERE ge.hotel_id = (
+            SELECT s.hotel_id
+            FROM reservation r
+            JOIN suite s ON r.suite_id = s.suite_id
+            WHERE r.reservation_id = ?
+        )
+    """;
+
+        List<GuestExperience> experiences = new ArrayList<>();
+
+        try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
+            stmt.setInt(1, reservationId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                GuestExperience ge = new GuestExperience(
+                        0,                              // hotelId not needed for display
+                        rs.getString("experience_name"),
+                        "",                             // description not needed for dropdown
+                        rs.getDouble("base_cost")
+                );
+                ge.setExperienceId(rs.getInt("experience_id"));
+                experiences.add(ge);
+            }
+        }
+
+        return experiences;
+    }
     public List<ReservationExperience> getExperiencesByReservation(int resId) {
         List<ReservationExperience> experiences = new ArrayList<>();
         String sql = """

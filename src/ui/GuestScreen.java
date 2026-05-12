@@ -67,6 +67,7 @@ public class GuestScreen {
         }
         Guest guest = new Guest(name, email, phone, tier);
         guestDAO.insertGuest(guest);
+        loadAllGuests();
         clearGuest();
 
     }
@@ -83,11 +84,11 @@ public class GuestScreen {
         alert.setContentText(msg);
         alert.showAndWait();
     }
-    @FXML private void updateGuestTier() throws SQLException
-    {
-        int guestId =  Integer.parseInt(updateIdField.getText());
-        String tier = updateTierCombo.getSelectionModel().getSelectedItem().toString();
-
+    @FXML private void updateGuestTier() throws SQLException {
+        int guestId = Integer.parseInt(updateIdField.getText());
+        String tier = updateTierCombo.getSelectionModel().getSelectedItem();
+        if (tier == null) { showAlert("Please select a tier"); return; }
+        guestDAO.updateLoyalityTier(guestId, tier);
     }
     @FXML private void goReservation() throws Exception { App.showScreen("ReservationScreen"); }
     @FXML private void goCheckout() throws Exception { App.showScreen("CheckoutScreen"); }

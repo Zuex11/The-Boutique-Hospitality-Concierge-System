@@ -1,8 +1,7 @@
 package dao;
 
 import db.DatabaseConnection;
-import models.Hotel;
-import models.SuiteClass;
+import models.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -31,8 +30,8 @@ public class HotelDAO {
             
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    // Note: You'll need to add a setHotelId method to your Hotel model
-                    // hotel.setHotelId(generatedKeys.getInt(1));
+
+                    hotel.setHotelId(generatedKeys.getInt(1));
                 }
             }
         }
@@ -84,8 +83,8 @@ public class HotelDAO {
                     rs.getString("location"),
                     rs.getInt("total_suites")
                 );
-                // Note: You'll need to add a setHotelId method to your Hotel model
-                // hotel.setHotelId(rs.getInt("hotel_id"));
+
+                 hotel.setHotelId(rs.getInt("hotel_id"));
                 return hotel;
             }
             return null;
@@ -109,7 +108,7 @@ public class HotelDAO {
                     rs.getString("location"),
                     rs.getInt("total_suites")
                 );
-                // hotel.setHotelId(rs.getInt("hotel_id"));
+                 hotel.setHotelId(rs.getInt("hotel_id"));
                 hotels.add(hotel);
             }
         }
@@ -134,7 +133,7 @@ public class HotelDAO {
                     rs.getString("location"),
                     rs.getInt("total_suites")
                 );
-                // hotel.setHotelId(rs.getInt("hotel_id"));
+                 hotel.setHotelId(rs.getInt("hotel_id"));
                 hotels.add(hotel);
             }
         }
@@ -159,7 +158,7 @@ public class HotelDAO {
                     rs.getString("location"),
                     rs.getInt("total_suites")
                 );
-                // hotel.setHotelId(rs.getInt("hotel_id"));
+                hotel.setHotelId(rs.getInt("hotel_id"));
                 hotels.add(hotel);
             }
         }
@@ -279,7 +278,7 @@ public class HotelDAO {
                     rs.getString("location"),
                     rs.getInt("total_suites")
                 );
-                // hotel.setHotelId(rs.getInt("hotel_id"));
+                hotel.setHotelId(rs.getInt("hotel_id"));
                 hotels.add(hotel);
             }
         }
