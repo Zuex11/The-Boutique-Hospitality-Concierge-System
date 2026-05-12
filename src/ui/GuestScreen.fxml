@@ -10,21 +10,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ScrollPane?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
          <children>
             <VBox prefHeight="78.0" prefWidth="1096.0">
+               <HBox prefHeight="56.0" prefWidth="1100.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
                <children>
-                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
-                     <children>
-                        <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR " />
-                        <Button mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
-                        <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
-                        <Button layoutX="286.0" layoutY="25.0" mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
-                     </children>
-                  </HBox>
+                  <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR / Concierge System" />
+                  <ScrollPane styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" fitToHeight="true" vbarPolicy="NEVER" hbarPolicy="AS_NEEDED" HBox.hgrow="ALWAYS">
+                     <content>
+                        <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
+                           <children>
+                              <Button mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
+                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
+                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
+                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="HOTELS &amp; SUITES" />
+                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CONCIERGE" />
+                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="REPORTS" />
+                           </children>
+                        </HBox>
+                     </content>
+                  </ScrollPane>
                </children>
+            </HBox>
             </VBox>
             <VBox prefHeight="135.0" prefWidth="1100.0" spacing="4.0" styleClass="page-header" stylesheets="@../Util/AppColors.css">
                <children>

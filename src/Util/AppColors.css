@@ -1,12 +1,6 @@
 /* ── TOP NAV BAR ── */
 .top-nav {
-    -fx-background-color: #2a2420;
-    -fx-border-color: #3a3028;
-    -fx-border-width: 0 0 1 0;
-    -fx-padding: 0 40 0 40;
-    -fx-pref-height: 56;
-    -fx-alignment: CENTER_LEFT;
-    -fx-spacing: 48;
+    -fx-spacing: 0;
 }
 
 .brand-label {
@@ -17,34 +11,73 @@
 }
 
 /* ── NAV TABS ── */
+.top-nav {
+    -fx-background-color: #2a2420;
+    -fx-padding: 0 0 0 0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #3a3028;
+    -fx-border-width: 0 0 1 0;
+}
+
+.nav-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.nav-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.nav-scroll .scroll-bar:horizontal {
+    -fx-pref-height: 4px;
+    -fx-background-color: transparent;
+}
+
+.nav-scroll .scroll-bar:horizontal .thumb {
+    -fx-background-color: #3a3028;
+    -fx-background-radius: 2px;
+}
+
+.nav-scroll .scroll-bar:horizontal .track {
+    -fx-background-color: transparent;
+}
+
+.nav-buttons {
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER_LEFT;
+    -fx-pref-height: 56px;
+}
+
 .nav-tab {
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-border-width: 0 0 2 0;
-    -fx-background-radius: 0;
     -fx-text-fill: #7a6f62;
-    -fx-font-size: 15px;
-    -fx-font-weight: normal;
-    -fx-padding: 18 28 16 28;
+    -fx-font-size: 11px;
+    -fx-letter-spacing: 0.16em;
+    -fx-padding: 0 20 0 20;
+    -fx-pref-height: 56px;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
     -fx-cursor: hand;
 }
+
 .nav-tab:hover {
-    -fx-background-color: #35302a;
     -fx-text-fill: #f5f0e8;
+    -fx-background-color: transparent;
 }
 
 .nav-tab-active {
     -fx-background-color: transparent;
+    -fx-text-fill: #d4af5a;
+    -fx-font-size: 11px;
+    -fx-padding: 0 20 0 20;
+    -fx-pref-height: 56px;
+    -fx-background-radius: 0;
     -fx-border-color: transparent transparent #b8973a transparent;
     -fx-border-width: 0 0 2 0;
-    -fx-background-radius: 0;
-    -fx-text-fill: #d4af5a;
-    -fx-font-size: 15px;
-    -fx-font-weight: normal;
-    -fx-padding: 18 28 16 28;
     -fx-cursor: hand;
 }
-
 /* ── PAGE HEADER ── */
 .page-header {
     -fx-background-color: white;
@@ -420,6 +453,7 @@
     -fx-padding: 0;
 }
 
+
 .reports-scroll .scroll-bar:vertical {
     -fx-background-color: transparent;
     -fx-pref-width: 8px;
@@ -483,4 +517,40 @@
 
 .report-output .content {
     -fx-background-color: #f0ebe0;
+}
+
+}
+.secondScrollPane  {
+    -fx-background: #faf7f2;
+    -fx-background-color: #faf7f2;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+
+.secondScrollPane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.secondScrollPane .scroll-bar:vertical .thumb {
+    -fx-background-color: #ddd5c4;
+    -fx-background-radius: 4px;
+}
+
+.secondScrollPane .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.secondScrollPane .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
+.secondScrollPane .viewport {
+    -fx-background-color: #faf7f2;
+}
+
+.secondScrollPane .corner {
+    -fx-background-color: transparent;
 }
