@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     private static final String URL =
-            "jdbc:sqlserver://localhost:1433;databaseName=Database_project"
-                    + ";integratedSecurity=true;encrypt=true;trustServerCertificate=true";
-
+            "jdbc:sqlserver://localhost:50983;databaseName=Database_project"
+                    + ";integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+                    + ";user=sa;password=1234";
     private static DatabaseConnection instance ;
     private Connection connection;
 
