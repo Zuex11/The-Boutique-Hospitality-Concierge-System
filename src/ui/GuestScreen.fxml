@@ -9,9 +9,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.ScrollPane?>
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="750.0" prefWidth="1100.0"
+      stylesheets="@../Util/AppColors.css"
+      xmlns="http://javafx.com/javafx/26"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ui.GuestScreen">
    <children>
       <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
          <children>
@@ -24,8 +29,8 @@
                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
                            <children>
                               <Button mnemonicParsing="false" styleClass="nav-tab-active" stylesheets="@../Util/AppColors.css" text="GUEST REGISTRY" />
-                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
-                              <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
+                              <Button mnemonicParsing="false" onAction="#goReservation" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="RESERVATIONS" />
+                              <Button mnemonicParsing="false" onAction="#goCheckout" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CHECKOUT &amp; FOLIO" />
                               <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="HOTELS &amp; SUITES" />
                               <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="CONCIERGE" />
                               <Button mnemonicParsing="false" styleClass="nav-tab" stylesheets="@../Util/AppColors.css" text="REPORTS" />
@@ -48,31 +53,31 @@
                      <children>
                         <Label prefWidth="206.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Register New Guest" />
                         <Label layoutX="10.0" layoutY="10.0" prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="FULL NAME" />
-                        <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. Mahmoud Ehab" />
+                        <TextField fx:id="nameField" prefHeight="39.0" prefWidth="388.0" promptText="e.g. Mahmoud Ehab" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                         <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="EMAIL ADDRESS" />
-                        <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="guest@email.com" />
+                        <TextField fx:id="emailField" prefHeight="39.0" prefWidth="388.0" promptText="guest@email.com" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <VBox prefHeight="100.0" prefWidth="184.0">
                                  <children>
                                     <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="PHONE" />
-                                    <TextField prefHeight="39.0" prefWidth="183.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="+20 10..." />
+                                    <TextField fx:id="phoneField" prefHeight="39.0" prefWidth="183.0" promptText="+20 10..." styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                  </children>
                               </VBox>
                               <Pane prefHeight="100.0" prefWidth="57.0" />
                               <VBox layoutX="216.0" layoutY="10.0" prefHeight="100.0" prefWidth="195.0">
                                  <children>
                                     <Label prefWidth="206.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="LOYALTY TIER" />
-                                    <ComboBox prefHeight="22.0" prefWidth="195.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                    <ComboBox fx:id="tierCombo" prefHeight="22.0" prefWidth="195.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                         <HBox prefHeight="33.0" prefWidth="379.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ REGISTER GUEST" />
+                              <Button mnemonicParsing="false" onAction="#registerGuest" prefHeight="57.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="+ REGISTER GUEST" />
                               <Pane layoutX="346.0" layoutY="10.0" prefHeight="59.0" prefWidth="25.0" />
-                              <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="143.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
+                              <Button mnemonicParsing="false" onAction="#clearGuest" prefHeight="59.0" prefWidth="143.0" styleClass="btn-ghost" stylesheets="@../Util/AppColors.css" text="CLEAR" />
                               <Pane prefHeight="59.0" prefWidth="20.0" />
                               <Pane layoutX="211.0" layoutY="10.0" prefHeight="59.0" prefWidth="21.0" />
                            </children>
@@ -80,11 +85,11 @@
                         <Pane prefHeight="20.0" prefWidth="378.0" />
                         <Label styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Update Loyalty Tier" />
                         <Label layoutX="10.0" layoutY="369.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="GUEST ID" />
-                        <TextField prefHeight="39.0" prefWidth="388.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" text="e.g. 1042" />
+                        <TextField fx:id="updateIdField" prefHeight="39.0" prefWidth="388.0" promptText="e.g. 1042" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                         <Label layoutX="10.0" layoutY="407.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="NEW TIER" />
-                        <ComboBox prefHeight="21.0" prefWidth="370.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                        <ComboBox fx:id="updateTierCombo" prefHeight="21.0" prefWidth="370.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                         <Pane prefHeight="23.0" prefWidth="370.0" />
-                        <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="UPDATE TIER" />
+                        <Button mnemonicParsing="false" onAction="#updateGuestTier" prefHeight="45.0" prefWidth="219.0" styleClass="btn-primary" stylesheets="@../Util/AppColors.css" text="UPDATE TIER" />
                      </children>
                   </VBox>
                   <VBox maxWidth="550.0" minWidth="550.0" prefHeight="200.0" prefWidth="550.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
@@ -99,7 +104,8 @@
                               <TableColumn fx:id="colTier" prefWidth="87.0" text="TIER" />
                            </columns>
                         </TableView>
-                     </children></VBox>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </children>
