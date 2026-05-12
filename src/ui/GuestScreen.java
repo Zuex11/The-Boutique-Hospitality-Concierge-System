@@ -59,7 +59,8 @@ public class GuestScreen {
         String name = nameField.getText();
         String email = emailField.getText();
         String phone = phoneField.getText();
-        String tier = tierCombo.getSelectionModel().getSelectedItem().toString();
+        String tier = tierCombo.getSelectionModel().getSelectedItem();
+        if (tier == null) { showAlert("Please select a loyalty tier"); return; }
 
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || tier.isEmpty()) {
             showAlert("Please fill all the fields");
@@ -85,10 +86,17 @@ public class GuestScreen {
         alert.showAndWait();
     }
     @FXML private void updateGuestTier() throws SQLException {
-        int guestId = Integer.parseInt(updateIdField.getText());
+        String idText = updateIdField.getText().trim();
+        if (idText.isEmpty()) { showAlert("Please enter a Guest ID"); return; }
+        int guestId;
+        try { guestId = Integer.parseInt(idText); }
+        catch (NumberFormatException e) { showAlert("Guest ID must be a number."); return; }
         String tier = updateTierCombo.getSelectionModel().getSelectedItem();
         if (tier == null) { showAlert("Please select a tier"); return; }
         guestDAO.updateLoyalityTier(guestId, tier);
+        loadAllGuests();
+        updateIdField.setText("");
+        updateTierCombo.getSelectionModel().clearSelection();
     }
     @FXML private void goReservation() throws Exception { App.showScreen("ReservationScreen"); }
     @FXML private void goCheckout() throws Exception { App.showScreen("CheckoutScreen"); }
