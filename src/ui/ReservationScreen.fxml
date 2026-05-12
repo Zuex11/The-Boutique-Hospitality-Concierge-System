@@ -117,7 +117,7 @@
                         <TableView fx:id="existingReservations" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
                           <columns>
                             <TableColumn fx:id="colResId" prefWidth="67.0" text="RES ID" />
-                            <TableColumn fx:id="colGuestName" prefWidth="113.0" text="GUEST" />
+                              <TableColumn fx:id="colGuestName" prefWidth="113.0" text="GUEST ID" />
                               <TableColumn fx:id="colSuiteId" text="SUITE" />
                               <TableColumn fx:id="colCheckIn" prefWidth="120.0" text="CHECK-IN" />
                               <TableColumn fx:id="colCheckOut" prefWidth="110.0" text="CHECK-OUT" />

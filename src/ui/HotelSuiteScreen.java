@@ -45,6 +45,8 @@ public class HotelSuiteScreen {
     @FXML private TableColumn<SuiteClass, Double> colNightlyRate;
     @FXML private TableColumn<SuiteClass, String> colAmenities;
 
+    @FXML private ComboBox<String> classHotelCombo;
+
     private HotelDAO hotelDAO;
     private List<Hotel> hotelList;
 
@@ -61,7 +63,7 @@ public class HotelSuiteScreen {
         colClassName.setCellValueFactory(new PropertyValueFactory<>("className"));
         colNightlyRate.setCellValueFactory(new PropertyValueFactory<>("nightlyRate"));
         colAmenities.setCellValueFactory(new PropertyValueFactory<>("amenities"));
-
+        populateClassHotelCombo();
         try {
             hotelDAO = new HotelDAO();
             loadHotels();
@@ -91,6 +93,7 @@ public class HotelSuiteScreen {
             clearHotelForm();
             loadHotels();
             populateHotelCombo();
+            populateClassHotelCombo();
 
         } catch (NumberFormatException e) {
             showAlert("Total suites must be a number.");
@@ -232,6 +235,7 @@ public class HotelSuiteScreen {
         classNameField.clear();
         nightlyRateField.clear();
         amenitiesField.clear();
+        classHotelCombo.setValue(null); // add this line
     }
 
     private void clearSuiteForm() {
@@ -245,6 +249,12 @@ public class HotelSuiteScreen {
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.showAndWait();
+    }
+    private void populateClassHotelCombo() throws SQLException {
+        List<Hotel> hotels = hotelDAO.getAllHotels();
+        ObservableList<String> names = FXCollections.observableArrayList();
+        for (Hotel h : hotels) names.add(h.getHotelId() + " - " + h.getName());
+        classHotelCombo.setItems(names);
     }
 
     @FXML private void goGuest() { try { App.showScreen("GuestScreen"); } catch (Exception e) { e.printStackTrace(); } }
