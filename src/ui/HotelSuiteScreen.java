@@ -63,9 +63,9 @@ public class HotelSuiteScreen {
         colClassName.setCellValueFactory(new PropertyValueFactory<>("className"));
         colNightlyRate.setCellValueFactory(new PropertyValueFactory<>("nightlyRate"));
         colAmenities.setCellValueFactory(new PropertyValueFactory<>("amenities"));
-        populateClassHotelCombo();
         try {
             hotelDAO = new HotelDAO();
+            populateClassHotelCombo();
             loadHotels();
             loadSuiteClasses();
             populateHotelCombo();
@@ -122,7 +122,7 @@ public class HotelSuiteScreen {
             double rate = Double.parseDouble(rateText);
 
             // get selected hotel from combo
-            String selectedHotel = suiteHotelCombo.getValue();
+            String selectedHotel = classHotelCombo.getValue();
             if (selectedHotel == null) {
                 showAlert("Please select a hotel for this suite class.");
                 return;

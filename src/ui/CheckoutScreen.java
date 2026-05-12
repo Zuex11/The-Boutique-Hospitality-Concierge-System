@@ -161,6 +161,8 @@ public class CheckoutScreen {
 
         } catch (NumberFormatException e) {
             showAlert("Res-Experience ID must be a number.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
