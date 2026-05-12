@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ReservationScreen">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ReportScreen">
     <children>
         <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
             <children>
@@ -49,42 +49,42 @@
                            <children>
                               <Label prefHeight="38.0" prefWidth="227.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Most Popular Suite Class" />
                               <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Suite class with the highest number of reservations overall" />
-                              <TextArea editable="false" prefHeight="60.0" prefWidth="1016.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
+                              <TextArea fx:id="reportOutput1" editable="false" prefHeight="60.0" prefWidth="1016.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
                            </children>
                         </VBox>
                         <VBox layoutX="30.0" layoutY="28.0" prefHeight="200.0" prefWidth="1118.0" styleClass="report-section" stylesheets="@../Util/AppColors.css">
                            <children>
                               <Label prefHeight="38.0" prefWidth="375.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Hotels With No Experiences Last Month" />
                               <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Hotel properties that had zero guest experiences booked in the previous calendar month" />
-                              <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
+                              <TextArea fx:id="reportOutput2" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
                            </children>
                         </VBox>
                         <VBox layoutX="30.0" layoutY="191.0" prefHeight="200.0" prefWidth="1118.0" styleClass="report-section" stylesheets="@../Util/AppColors.css">
                            <children>
                               <Label prefHeight="38.0" prefWidth="249.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Top Concierge Last Month" />
                               <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Concierge who managed the highest total value of experiences in the previous calendar month" />
-                              <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
+                              <TextArea fx:id="reportOutput3" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
                            </children>
                         </VBox>
                         <VBox layoutX="30.0" layoutY="307.0" prefHeight="200.0" prefWidth="1118.0" styleClass="report-section" stylesheets="@../Util/AppColors.css">
                            <children>
                               <Label prefHeight="38.0" prefWidth="459.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Guests With No Add-On Experiences Last Month" />
                               <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Guests who made a reservation last month but did not book any extra experiences" />
-                              <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
+                              <TextArea fx:id="reportOutput4" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
                            </children>
                         </VBox>
                         <VBox layoutX="30.0" layoutY="448.0" prefHeight="200.0" prefWidth="1118.0" styleClass="report-section" stylesheets="@../Util/AppColors.css">
                            <children>
                               <Label prefHeight="38.0" prefWidth="485.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Available Suites Per Hotel Last Month" />
                               <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Suites not reserved at any point during the previous calendar month, grouped by hotel" />
-                              <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
+                              <TextArea fx:id="reportOutput5" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
                            </children>
                         </VBox>
                         <VBox layoutX="30.0" layoutY="538.0" prefHeight="200.0" prefWidth="1118.0" styleClass="report-section" stylesheets="@../Util/AppColors.css">
                            <children>
                               <Label prefHeight="38.0" prefWidth="635.0" styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Guest Suite Spend Last Month" />
                               <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="Each guest's profile alongside their total suite spending from the previous calendar month" />
-                              <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
+                              <TextArea fx:id="reportOutput6" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Results will appear here" styleClass="report-output" stylesheets="@../Util/AppColors.css" />
                            </children>
                         </VBox>
                      </children>
