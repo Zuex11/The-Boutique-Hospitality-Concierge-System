@@ -9,6 +9,8 @@ import models.ReservationExperience;
 import dao.ExperienceDAO;
 import App.App;
 
+import dao.ReservationDAO;
+import dao.GuestDAO;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,24 +18,35 @@ import java.util.List;
 public class CheckoutScreen {
 
     // Add Experience fields
-    @FXML private TextField reservationIdField;
-    @FXML private ComboBox<GuestExperience> experienceCombo;
-    @FXML private TextField conciergeIdField;
-    @FXML private TextField actualCostField;
+    @FXML
+    private TextField reservationIdField;
+    @FXML
+    private ComboBox<GuestExperience> experienceCombo;
+    @FXML
+    private TextField conciergeIdField;
+    @FXML
+    private TextField actualCostField;
 
     // Remove Experience field
-    @FXML private TextField resExpIdField;
+    @FXML
+    private TextField resExpIdField;
 
     // Folio display
-    @FXML private VBox folioBox;
-    @FXML private Label totalLabel;
+    @FXML
+    private VBox folioBox;
+    @FXML
+    private Label totalLabel;
 
     private ExperienceDAO experienceDAO;
+    private ReservationDAO reservationDAO;
+    private GuestDAO guestDAO;
 
     @FXML
     public void initialize() {
         try {
             experienceDAO = new ExperienceDAO();
+            reservationDAO = new ReservationDAO();
+            guestDAO = new GuestDAO();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,7 +56,8 @@ public class CheckoutScreen {
     @FXML
     private void loadExperiences() {
         String idText = reservationIdField.getText().trim();
-        if (idText.isEmpty()) return;
+        if (idText.isEmpty())
+            return;
 
         int reservationId;
         try {
@@ -54,8 +68,7 @@ public class CheckoutScreen {
         }
 
         try {
-            List<GuestExperience> available =
-                    experienceDAO.getAvailableExperiencesForReservation(reservationId);
+            List<GuestExperience> available = experienceDAO.getAvailableExperiencesForReservation(reservationId);
             experienceCombo.setItems(FXCollections.observableArrayList(available));
 
             // Show experience name in the combo
@@ -103,7 +116,7 @@ public class CheckoutScreen {
 
         try {
             int reservationId = Integer.parseInt(idText);
-            int conciergeId   = Integer.parseInt(conciergeText);
+            int conciergeId = Integer.parseInt(conciergeText);
             double actualCost = Double.parseDouble(costText);
 
             ReservationExperience re = new ReservationExperience(
@@ -111,10 +124,11 @@ public class CheckoutScreen {
                     selected.getExperienceId(),
                     conciergeId,
                     actualCost,
-                    LocalDate.now()
-            );
+                    LocalDate.now());
 
             experienceDAO.insertExperience(re);
+            int guestId = reservationDAO.getGuestIdByReservation(reservationId);
+            guestDAO.updateTotalSpend(guestId, actualCost);
             clearAdd();
             loadFolio(reservationId);
 
@@ -151,8 +165,7 @@ public class CheckoutScreen {
     }
 
     private void loadFolio(int reservationId) {
-        List<ReservationExperience> experiences =
-                experienceDAO.getExperiencesByReservation(reservationId);
+        List<ReservationExperience> experiences = experienceDAO.getExperiencesByReservation(reservationId);
 
         folioBox.getChildren().clear();
         double total = 0;
@@ -162,8 +175,7 @@ public class CheckoutScreen {
                     "Exp #" + re.getExperienceId()
                             + "  |  Concierge #" + re.getConciergeId()
                             + "  |  $" + String.format("%.2f", re.getActualCost())
-                            + "  |  " + re.getBookedDate()
-            );
+                            + "  |  " + re.getBookedDate());
             entry.getStyleClass().add("folio-meta");
             folioBox.getChildren().add(entry);
             total += re.getActualCost();
@@ -191,10 +203,33 @@ public class CheckoutScreen {
     }
 
     // Nav
-    @FXML private void goGuest()       throws Exception { App.showScreen("GuestScreen"); }
-    @FXML private void goReservation() throws Exception { App.showScreen("ReservationScreen"); }
-    @FXML private void goCheckout()    throws Exception { App.showScreen("CheckoutScreen"); }
-    @FXML private void goHotelSuite() throws Exception { App.showScreen("HotelSuiteScreen"); }
-    @FXML private void goConcierge()  throws Exception { App.showScreen("ConciergeScreen"); }
-    @FXML private void goReports()    throws Exception { App.showScreen("ReportScreen"); }
+    @FXML
+    private void goGuest() throws Exception {
+        App.showScreen("GuestScreen");
+    }
+
+    @FXML
+    private void goReservation() throws Exception {
+        App.showScreen("ReservationScreen");
+    }
+
+    @FXML
+    private void goCheckout() throws Exception {
+        App.showScreen("CheckoutScreen");
+    }
+
+    @FXML
+    private void goHotelSuite() throws Exception {
+        App.showScreen("HotelSuiteScreen");
+    }
+
+    @FXML
+    private void goConcierge() throws Exception {
+        App.showScreen("ConciergeScreen");
+    }
+
+    @FXML
+    private void goReports() throws Exception {
+        App.showScreen("ReportScreen");
+    }
 }

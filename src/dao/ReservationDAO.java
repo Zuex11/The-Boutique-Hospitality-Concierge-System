@@ -27,10 +27,15 @@ public class ReservationDAO {
     }
 
     public void cancelReservation(int reservationId) throws SQLException {
-        String sql = "DELETE FROM reservation WHERE reservation_id = ?";
-        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-        stmt.setInt(1, reservationId);
-        stmt.executeUpdate();
+        String deleteExp = "DELETE FROM reservation_experience WHERE reservation_id = ?";
+        PreparedStatement s1 = db.getConnection().prepareStatement(deleteExp);
+        s1.setInt(1, reservationId);
+        s1.executeUpdate();
+
+        String deleteRes = "DELETE FROM reservation WHERE reservation_id = ?";
+        PreparedStatement s2 = db.getConnection().prepareStatement(deleteRes);
+        s2.setInt(1, reservationId);
+        s2.executeUpdate();
     }
 
     public List<Reservation> getAllReservations() throws SQLException {
@@ -45,8 +50,7 @@ public class ReservationDAO {
                         rs.getInt("guest_id"),
                         rs.getInt("suite_id"),
                         rs.getDate("check_in").toLocalDate(),
-                        rs.getDate("check_out").toLocalDate()
-                );
+                        rs.getDate("check_out").toLocalDate());
                 r.setReservationId(rs.getInt("reservation_id"));
                 r.statusSetter(rs.getString("status"));
                 r.totalCostSetter(rs.getInt("total_cost"));
@@ -65,25 +69,24 @@ public class ReservationDAO {
         List<Reservation> list = new ArrayList<>();
         while (rs.next()) {
             list.add(new Reservation(
-                rs.getInt("guest_id"),
-                rs.getInt("suite_id"),
-                rs.getDate("check_in").toLocalDate(),
-                rs.getDate("check_out").toLocalDate()
-            ));
+                    rs.getInt("guest_id"),
+                    rs.getInt("suite_id"),
+                    rs.getDate("check_in").toLocalDate(),
+                    rs.getDate("check_out").toLocalDate()));
         }
         return list;
     }
 
     public List<Suite> getAvailableSuites() throws SQLException {
         String sql = """
-        SELECT s.suite_id, s.suite_number, s.hotel_id, s.class_id,
-               sc.class_name, sc.nightly_rate
-        FROM suite s
-        INNER JOIN suite_class sc ON s.class_id = sc.class_id
-        WHERE s.suite_id NOT IN (
-            SELECT suite_id FROM reservation WHERE check_out >= GETDATE()
-        )
-    """;
+                    SELECT s.suite_id, s.suite_number, s.hotel_id, s.class_id,
+                           sc.class_name, sc.nightly_rate
+                    FROM suite s
+                    INNER JOIN suite_class sc ON s.class_id = sc.class_id
+                    WHERE s.suite_id NOT IN (
+                        SELECT suite_id FROM reservation WHERE check_out >= GETDATE()
+                    )
+                """;
 
         List<Suite> list = new ArrayList<>();
 
@@ -93,13 +96,22 @@ public class ReservationDAO {
                 Suite s = new Suite(
                         rs.getInt("hotel_id"),
                         rs.getInt("class_id"),
-                        rs.getString("suite_number")
-                );
+                        rs.getString("suite_number"));
                 s.setSuiteId(rs.getInt("suite_id"));
                 list.add(s);
             }
         }
 
         return list;
+    }
+
+    public int getGuestIdByReservation(int reservationId) throws SQLException {
+        String sql = "SELECT guest_id FROM reservation WHERE reservation_id = ?";
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        stmt.setInt(1, reservationId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next())
+            return rs.getInt("guest_id");
+        throw new SQLException("Reservation not found: " + reservationId);
     }
 }
