@@ -20,8 +20,6 @@ public class ExperienceDAO {
      * Covers: 2nd insert requirement
      */
     public void insertExperience(ReservationExperience re) throws SQLException {
-        // Validate that experience and concierge belong to the same hotel as the
-        // reservation
         String validationSql = """
                     SELECT r.suite_id, s.hotel_id as res_hotel_id,
                            ge.hotel_id as exp_hotel_id, c.hotel_id as con_hotel_id
@@ -32,13 +30,17 @@ public class ExperienceDAO {
                     WHERE r.reservation_id = ?
                 """;
 
-        try (Connection conn = db.getConnection();
-                PreparedStatement validStmt = conn.prepareStatement(validationSql)) {
+        String insertSql = "INSERT INTO reservation_experience (reservation_id, experience_id, concierge_id, actual_cost, booked_date) VALUES (?, ?, ?, ?, ?)";
 
+        Connection conn = db.getConnection();
+        conn.setAutoCommit(false);
+
+        try {
+            // Validation
+            PreparedStatement validStmt = conn.prepareStatement(validationSql);
             validStmt.setInt(1, re.getExperienceId());
             validStmt.setInt(2, re.getConciergeId());
             validStmt.setInt(3, re.getReservationId());
-
             ResultSet rs = validStmt.executeQuery();
 
             if (!rs.next()) {
@@ -55,21 +57,23 @@ public class ExperienceDAO {
                                 "Reservation hotel: " + resHotelId + ", Experience hotel: " + expHotelId +
                                 ", Concierge hotel: " + conHotelId);
             }
-        }
 
-        // If validation passes, insert the experience
-        String sql = "INSERT INTO reservation_experience (reservation_id, experience_id, concierge_id, actual_cost, booked_date) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection conn = db.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+            // Insert
+            PreparedStatement stmt = conn.prepareStatement(insertSql);
             stmt.setInt(1, re.getReservationId());
             stmt.setInt(2, re.getExperienceId());
             stmt.setInt(3, re.getConciergeId());
             stmt.setDouble(4, re.getActualCost());
             stmt.setDate(5, Date.valueOf(re.getBookedDate()));
-
             stmt.executeUpdate();
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            conn.rollback();
+            throw e;
+        } finally {
+            conn.setAutoCommit(true);
         }
     }
 
@@ -96,15 +100,15 @@ public class ExperienceDAO {
      */
     public List<GuestExperience> getAvailableExperiencesForReservation(int reservationId) throws SQLException {
         String sql = """
-        SELECT ge.experience_id, ge.experience_name, ge.base_cost
-        FROM guest_experience ge
-        WHERE ge.hotel_id = (
-            SELECT s.hotel_id
-            FROM reservation r
-            JOIN suite s ON r.suite_id = s.suite_id
-            WHERE r.reservation_id = ?
-        )
-    """;
+                    SELECT ge.experience_id, ge.experience_name, ge.base_cost
+                    FROM guest_experience ge
+                    WHERE ge.hotel_id = (
+                        SELECT s.hotel_id
+                        FROM reservation r
+                        JOIN suite s ON r.suite_id = s.suite_id
+                        WHERE r.reservation_id = ?
+                    )
+                """;
 
         List<GuestExperience> experiences = new ArrayList<>();
 
@@ -114,11 +118,10 @@ public class ExperienceDAO {
 
             while (rs.next()) {
                 GuestExperience ge = new GuestExperience(
-                        0,                              // hotelId not needed for display
+                        0, // hotelId not needed for display
                         rs.getString("experience_name"),
-                        "",                             // description not needed for dropdown
-                        rs.getDouble("base_cost")
-                );
+                        "", // description not needed for dropdown
+                        rs.getDouble("base_cost"));
                 ge.setExperienceId(rs.getInt("experience_id"));
                 experiences.add(ge);
             }
@@ -126,6 +129,7 @@ public class ExperienceDAO {
 
         return experiences;
     }
+
     public List<ReservationExperience> getExperiencesByReservation(int resId) {
         List<ReservationExperience> experiences = new ArrayList<>();
         String sql = """

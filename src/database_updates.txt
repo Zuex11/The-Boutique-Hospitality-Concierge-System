@@ -128,3 +128,12 @@ CREATE TABLE users (
 ALTER TABLE guest_experience
 ADD hotel_id INT NOT NULL
 CONSTRAINT fk_experience_hotel FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id);
+
+UPDATE reservation
+SET check_in  = DATEADD(MONTH, -1, check_in),
+    check_out = DATEADD(MONTH, -1, check_out);
+
+UPDATE reservation_experience
+SET booked_date = DATEADD(MONTH, -1, booked_date);
+
+UPDATE reservation SET status = 'checked-out';
