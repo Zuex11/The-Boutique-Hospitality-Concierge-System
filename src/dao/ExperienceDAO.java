@@ -81,17 +81,12 @@ public class ExperienceDAO {
      * Delete a booked experience from a reservation
      * Covers: 1st delete requirement (with condition on res_exp_id)
      */
-    public void deleteExperience(int resExpId) {
+    public void deleteExperience(int resExpId) throws SQLException {
         String sql = "DELETE FROM reservation_experience WHERE res_exp_id = ?";
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        stmt.setInt(1, resExpId);
+        stmt.executeUpdate();
 
-        try (Connection conn = db.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, resExpId);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -141,7 +136,7 @@ public class ExperienceDAO {
                 """;
 
         try (Connection conn = db.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, resId);
             ResultSet rs = stmt.executeQuery();

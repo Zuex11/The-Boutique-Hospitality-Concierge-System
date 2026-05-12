@@ -17,12 +17,31 @@ public class ReservationDAO {
     }
 
     public void insertReservation(Reservation r) throws SQLException {
-        String sql = "INSERT INTO reservation (guest_id, suite_id, check_in, check_out) VALUES (?, ?, ?, ?)";
+        // check for date overlap on the same suite
+        String overlapCheck = """
+        SELECT COUNT(*) FROM reservation
+        WHERE suite_id = ? AND status != 'cancelled'
+        AND check_in < ? AND check_out > ?
+    """;
+        PreparedStatement check = db.getConnection().prepareStatement(overlapCheck);
+        check.setInt(1, r.getSuiteId());
+        check.setDate(2, Date.valueOf(r.getCheckOut()));
+        check.setDate(3, Date.valueOf(r.getCheckIn()));
+        ResultSet rs = check.executeQuery();
+        if (rs.next() && rs.getInt(1) > 0)
+            throw new SQLException("Suite is already booked for those dates.");
+
+        long nights = java.time.temporal.ChronoUnit.DAYS.between(r.getCheckIn(), r.getCheckOut());
+        double rate = getNightlyRate(r.getSuiteId());
+        double totalCost = nights * rate;
+        // safe to insert
+        String sql = "INSERT INTO reservation (guest_id, suite_id, check_in, check_out, total_cost) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement stmt = db.getConnection().prepareStatement(sql);
         stmt.setInt(1, r.getGuestId());
         stmt.setInt(2, r.getSuiteId());
         stmt.setDate(3, Date.valueOf(r.getCheckIn()));
         stmt.setDate(4, Date.valueOf(r.getCheckOut()));
+        stmt.setDouble(5, totalCost);
         stmt.executeUpdate();
     }
 
@@ -113,5 +132,17 @@ public class ReservationDAO {
         if (rs.next())
             return rs.getInt("guest_id");
         throw new SQLException("Reservation not found: " + reservationId);
+    }
+    private double getNightlyRate(int suiteId) throws SQLException {
+        String sql = """
+        SELECT sc.nightly_rate FROM suite s
+        JOIN suite_class sc ON s.class_id = sc.class_id
+        WHERE s.suite_id = ?
+    """;
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        stmt.setInt(1, suiteId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) return rs.getDouble("nightly_rate");
+        return 0;
     }
 }

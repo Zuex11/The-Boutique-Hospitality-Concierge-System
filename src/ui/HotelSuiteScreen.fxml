@@ -99,6 +99,13 @@
                                  <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                                  <children>
                                     <Label styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Add Suite Class" />
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label styleClass="field-label" stylesheets="@../Util/AppColors.css" text="HOTEL" />
+                                          <ComboBox fx:id="classHotelCombo" maxWidth="99999.0"
+                                                    styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                       </children>
+                                    </VBox>
                                     <HBox spacing="12.0">
                                        <children>
                                           <VBox spacing="5.0" HBox.hgrow="ALWAYS">

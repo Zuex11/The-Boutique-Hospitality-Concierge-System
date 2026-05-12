@@ -64,10 +64,18 @@
                                 <VBox prefHeight="81.0" prefWidth="493.0">
                                     <children>
                                         <Label styleClass="field-label" stylesheets="@../Util/AppColors.css" text="RESERVATION ID" />
-                                        <TextField fx:id="reservationIdField" onAction="#loadExperiences"
-                                                   prefHeight="39.0" prefWidth="493.0"
-                                                   promptText="e.g. 1002"
-                                                   styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <TextField fx:id="reservationIdField"
+                                                           prefHeight="39.0" HBox.hgrow="ALWAYS"
+                                                           promptText="e.g. 1002"
+                                                           styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                                <Button mnemonicParsing="false" onAction="#loadExperiences"
+                                                        prefHeight="39.0" prefWidth="80.0"
+                                                        styleClass="btn-ghost" stylesheets="@../Util/AppColors.css"
+                                                        text="LOAD" />
+                                            </children>
+                                        </HBox>
                                     </children>
                                 </VBox>
 
