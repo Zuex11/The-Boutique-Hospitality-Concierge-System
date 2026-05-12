@@ -95,7 +95,7 @@ public class ReservationDAO {
                         rs.getInt("class_id"),
                         rs.getString("suite_number")
                 );
-                s.setSuiteeId(rs.getInt("suite_id"));
+                s.setSuiteId(rs.getInt("suite_id"));
                 list.add(s);
             }
         }
