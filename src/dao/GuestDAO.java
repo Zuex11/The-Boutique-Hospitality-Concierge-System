@@ -32,15 +32,28 @@ public class GuestDAO {
     }
 
     //update loyalty tier
-    public void updateLoyalityTier (int guestId , String newTier) throws SQLException {
-        String sql = "UPDATE guest SET loyalty_tier = ? WHERE guest_id = ?";
+    public void updateLoyalityTier(int guestId, String newTier) throws SQLException {
+        // fetch current tier so we can log it
+        String getTier = "SELECT loyalty_tier FROM guest WHERE guest_id = ?";
+        PreparedStatement fetch = db.getConnection().prepareStatement(getTier);
+        fetch.setInt(1, guestId);
+        ResultSet rs = fetch.executeQuery();
+        String oldTier = rs.next() ? rs.getString("loyalty_tier") : "Unknown";
 
-        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-        stmt.setString(1,newTier);
-        stmt.setInt(2,guestId);
-
+        // update the tier
+        String update = "UPDATE guest SET loyalty_tier = ? WHERE guest_id = ?";
+        PreparedStatement stmt = db.getConnection().prepareStatement(update);
+        stmt.setString(1, newTier);
+        stmt.setInt(2, guestId);
         stmt.executeUpdate();
 
+        // write the audit log
+        String log = "INSERT INTO loyalty_tier_log (guest_id, old_tier, new_tier) VALUES (?, ?, ?)";
+        PreparedStatement logStmt = db.getConnection().prepareStatement(log);
+        logStmt.setInt(1, guestId);
+        logStmt.setString(2, oldTier);
+        logStmt.setString(3, newTier);
+        logStmt.executeUpdate();
     }
 
     //select all guests

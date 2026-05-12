@@ -33,7 +33,7 @@ public class ReservationScreen
     @FXML private TableColumn<Reservation, Integer> colSuiteId;
     @FXML private TableColumn<Reservation, String> colCheckIn;
     @FXML private TableColumn<Reservation, String> colCheckOut;
-    @FXML private AnchorPane suiteGrid;
+    @FXML private FlowPane suiteGrid;
     private ReservationDAO reservationDAO;
 
     @FXML public void initialize()
@@ -61,23 +61,17 @@ public class ReservationScreen
         ObservableList<Reservation> observableList = FXCollections.observableArrayList(list);
         existingReservations.setItems(observableList);
     }
-
-    private void loadSuites() throws SQLException
-    {
+    private void loadSuites() throws SQLException {
         suiteGrid.getChildren().clear();
         List<Suite> suites = reservationDAO.getAvailableSuites();
-
         for (Suite s : suites) {
             VBox card = new VBox(4);
             card.getStyleClass().add("suite-card");
-            card.setPrefWidth(200);
-
+            card.setPrefWidth(140);
             Label number = new Label(s.getSuiteNumber());
             number.getStyleClass().add("suite-number");
-
             Label status = new Label("Available");
             status.getStyleClass().add("badge-available");
-
             card.getChildren().addAll(number, status);
             suiteGrid.getChildren().add(card);
         }
