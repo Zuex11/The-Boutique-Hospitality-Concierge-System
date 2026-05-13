@@ -21,7 +21,7 @@
                     <children>
                         <HBox prefHeight="56.0" prefWidth="1100.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
                             <children>
-                                <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR / Concierge System" />
+                                <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="MIRAGE" />
                                 <ScrollPane fitToHeight="true" hbarPolicy="AS_NEEDED" styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                                     <content>
                                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
@@ -43,7 +43,7 @@
                 <VBox prefHeight="135.0" prefWidth="1100.0" spacing="4.0" styleClass="page-header" stylesheets="@../Util/AppColors.css">
                     <children>
                         <Label styleClass="page-title" stylesheets="@../Util/AppColors.css" text="Reservation Management" />
-                        <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="New bookings · Cancellations · Available suite lookup (join query)" />
+                        <Label styleClass="page-subtitle" stylesheets="@../Util/AppColors.css" text="New bookings · Cancellations · Available suite lookup " />
                     </children>
                 </VBox>
                 <HBox prefHeight="605.0" prefWidth="1100.0">
@@ -103,7 +103,7 @@
                         </VBox>
                         <VBox maxWidth="550.0" minWidth="550.0" prefHeight="200.0" prefWidth="550.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
                      <children>
-                        <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Available Suites — with Class &amp; Rate (JOIN)" />
+                        <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Available Suites" />
                          <ScrollPane fitToWidth="true" prefHeight="0.0" prefWidth="494.0" styleClass="reports-scroll" stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
                              <content>
                                  <FlowPane fx:id="suiteGrid" hgap="10" prefWrapLength="490" vgap="10">
