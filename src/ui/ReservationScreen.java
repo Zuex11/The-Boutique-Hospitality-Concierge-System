@@ -76,8 +76,12 @@ public class ReservationScreen {
             Label idLabel = new Label("ID: " + s.getSuiteId());
             idLabel.getStyleClass().add("suite-class-label");
 
-            Label status = new Label("Available");
-            status.getStyleClass().add("badge-available");
+            String availability = (s.getNextAvailable() != null)
+                    ? "Available from: " + s.getNextAvailable()
+                    : "Available now";
+
+            Label status = new Label(availability);
+            status.getStyleClass().add(s.getNextAvailable() != null ? "badge-occupied" : "badge-available");
 
             card.getChildren().addAll(number, hotel, idLabel, status);
             suiteGrid.getChildren().add(card);
