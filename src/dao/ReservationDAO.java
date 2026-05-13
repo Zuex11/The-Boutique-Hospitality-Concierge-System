@@ -5,7 +5,6 @@ import models.Reservation;
 import models.Suite;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +16,13 @@ public class ReservationDAO {
     }
 
     public void insertReservation(Reservation r) throws SQLException {
-        // check for date overlap on the same suite
         String overlapCheck = """
-        SELECT COUNT(*) FROM reservation
-        WHERE suite_id = ? AND status != 'cancelled'
-        AND check_in < ? AND check_out > ?
-    """;
+            SELECT COUNT(*) FROM reservation
+            WHERE suite_id = ?
+              AND status != 'cancelled'
+              AND check_in  < ?
+              AND check_out > ?
+        """;
         PreparedStatement check = db.getConnection().prepareStatement(overlapCheck);
         check.setInt(1, r.getSuiteId());
         check.setDate(2, Date.valueOf(r.getCheckOut()));
@@ -34,7 +34,7 @@ public class ReservationDAO {
         long nights = java.time.temporal.ChronoUnit.DAYS.between(r.getCheckIn(), r.getCheckOut());
         double rate = getNightlyRate(r.getSuiteId());
         double totalCost = nights * rate;
-        // safe to insert
+
         String sql = "INSERT INTO reservation (guest_id, suite_id, check_in, check_out, total_cost) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement stmt = db.getConnection().prepareStatement(sql);
         stmt.setInt(1, r.getGuestId());
@@ -59,9 +59,7 @@ public class ReservationDAO {
 
     public List<Reservation> getAllReservations() throws SQLException {
         String sql = "SELECT * FROM reservation";
-
         List<Reservation> list = new ArrayList<>();
-
         try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -76,7 +74,6 @@ public class ReservationDAO {
                 list.add(r);
             }
         }
-
         return list;
     }
 
@@ -98,17 +95,19 @@ public class ReservationDAO {
 
     public List<Suite> getAvailableSuites() throws SQLException {
         String sql = """
-                    SELECT s.suite_id, s.suite_number, s.hotel_id, s.class_id,
-                           sc.class_name, sc.nightly_rate
-                    FROM suite s
-                    INNER JOIN suite_class sc ON s.class_id = sc.class_id
-                    WHERE s.suite_id NOT IN (
-                        SELECT suite_id FROM reservation WHERE check_out >= GETDATE()
-                    )
-                """;
+            SELECT s.suite_id, s.suite_number, s.hotel_id, s.class_id,
+                   h.name AS hotel_name
+            FROM suite s
+            INNER JOIN hotel h ON s.hotel_id = h.hotel_id
+            WHERE s.suite_id NOT IN (
+                SELECT suite_id FROM reservation
+                WHERE check_out >= GETDATE()
+                  AND status != 'cancelled'
+            )
+            ORDER BY h.name, s.suite_number
+        """;
 
         List<Suite> list = new ArrayList<>();
-
         try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -117,10 +116,11 @@ public class ReservationDAO {
                         rs.getInt("class_id"),
                         rs.getString("suite_number"));
                 s.setSuiteId(rs.getInt("suite_id"));
+                // ── FIX 2: populate hotel name ──
+                s.setHotelName(rs.getString("hotel_name"));
                 list.add(s);
             }
         }
-
         return list;
     }
 
@@ -133,16 +133,27 @@ public class ReservationDAO {
             return rs.getInt("guest_id");
         throw new SQLException("Reservation not found: " + reservationId);
     }
+
     private double getNightlyRate(int suiteId) throws SQLException {
         String sql = """
-        SELECT sc.nightly_rate FROM suite s
-        JOIN suite_class sc ON s.class_id = sc.class_id
-        WHERE s.suite_id = ?
-    """;
+            SELECT sc.nightly_rate FROM suite s
+            JOIN suite_class sc ON s.class_id = sc.class_id
+            WHERE s.suite_id = ?
+        """;
         PreparedStatement stmt = db.getConnection().prepareStatement(sql);
         stmt.setInt(1, suiteId);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) return rs.getDouble("nightly_rate");
         return 0;
+    }
+
+
+    public double getReservationTotalCost(int reservationId) throws SQLException {
+        String sql = "SELECT total_cost FROM reservation WHERE reservation_id = ?";
+        PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+        stmt.setInt(1, reservationId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) return rs.getDouble("total_cost");
+        throw new SQLException("Reservation not found: " + reservationId);
     }
 }

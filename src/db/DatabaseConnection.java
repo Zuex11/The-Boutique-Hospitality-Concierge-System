@@ -10,25 +10,25 @@ public class DatabaseConnection {
             "jdbc:sqlserver://localhost:50983;databaseName=Database_project"
                     + ";integratedSecurity=false;encrypt=true;trustServerCertificate=true"
                     + ";user=sa;password=1234";
-    private static DatabaseConnection instance ;
+
+    private static DatabaseConnection instance;
     private Connection connection;
 
-    private DatabaseConnection () throws SQLException {
-        this.connection = DriverManager.getConnection(URL); //takes url and opens a connection with the sql server
+    private DatabaseConnection() throws SQLException {
+        this.connection = DriverManager.getConnection(URL);
     }
 
-    public static DatabaseConnection getInstance () throws SQLException {
-        if (instance == null || instance.connection.isClosed()) { //avoids opening two connections
+    public static DatabaseConnection getInstance() throws SQLException {
+        if (instance == null || instance.connection.isClosed()) {
             instance = new DatabaseConnection();
         }
         return instance;
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            connection = DriverManager.getConnection(URL);
+        }
         return connection;
     }
-
-
-      
-
 }
