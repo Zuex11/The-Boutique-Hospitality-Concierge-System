@@ -45,6 +45,7 @@ public class HotelSuiteScreen {
     @FXML private TableColumn<SuiteClass, Double> colNightlyRate;
     @FXML private TableColumn<SuiteClass, String> colAmenities;
 
+    // ── FIX: this is the hotel combo used in the "Add Suite Class" form ──
     @FXML private ComboBox<String> classHotelCombo;
 
     private HotelDAO hotelDAO;
@@ -52,7 +53,6 @@ public class HotelSuiteScreen {
 
     @FXML
     public void initialize() {
-        // table columns
         colHotelId.setCellValueFactory(new PropertyValueFactory<>("hotelId"));
         colHotelName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colHotelTheme.setCellValueFactory(new PropertyValueFactory<>("theme"));
@@ -63,12 +63,13 @@ public class HotelSuiteScreen {
         colClassName.setCellValueFactory(new PropertyValueFactory<>("className"));
         colNightlyRate.setCellValueFactory(new PropertyValueFactory<>("nightlyRate"));
         colAmenities.setCellValueFactory(new PropertyValueFactory<>("amenities"));
+
         try {
             hotelDAO = new HotelDAO();
-            populateClassHotelCombo();
             loadHotels();
             loadSuiteClasses();
             populateHotelCombo();
+            populateClassHotelCombo();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,8 +78,8 @@ public class HotelSuiteScreen {
     @FXML
     private void handleAddHotel() {
         try {
-            String name = hotelNameField.getText().trim();
-            String theme = hotelThemeField.getText().trim();
+            String name     = hotelNameField.getText().trim();
+            String theme    = hotelThemeField.getText().trim();
             String location = hotelLocationField.getText().trim();
             String countText = hotelSuiteCountField.getText().trim();
 
@@ -99,6 +100,7 @@ public class HotelSuiteScreen {
             showAlert("Total suites must be a number.");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert("Database error: " + e.getMessage());
         }
     }
 
@@ -110,8 +112,8 @@ public class HotelSuiteScreen {
     @FXML
     private void handleAddClass() {
         try {
-            String name = classNameField.getText().trim();
-            String rateText = nightlyRateField.getText().trim();
+            String name      = classNameField.getText().trim();
+            String rateText  = nightlyRateField.getText().trim();
             String amenities = amenitiesField.getText().trim();
 
             if (name.isEmpty() || rateText.isEmpty()) {
@@ -121,7 +123,7 @@ public class HotelSuiteScreen {
 
             double rate = Double.parseDouble(rateText);
 
-            // get selected hotel from combo
+            // ── FIX: was suiteHotelCombo — must be classHotelCombo ──
             String selectedHotel = classHotelCombo.getValue();
             if (selectedHotel == null) {
                 showAlert("Please select a hotel for this suite class.");
@@ -139,6 +141,7 @@ public class HotelSuiteScreen {
             showAlert("Nightly rate must be a number.");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert("Database error: " + e.getMessage());
         }
     }
 
@@ -152,7 +155,7 @@ public class HotelSuiteScreen {
         try {
             String hotelSelected = suiteHotelCombo.getValue();
             String classSelected = suiteClassCombo.getValue();
-            String number = suiteNumberField.getText().trim();
+            String number        = suiteNumberField.getText().trim();
 
             if (hotelSelected == null || classSelected == null || number.isEmpty()) {
                 showAlert("Please fill all suite fields.");
@@ -168,6 +171,7 @@ public class HotelSuiteScreen {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert("Database error: " + e.getMessage());
         }
     }
 
@@ -176,7 +180,7 @@ public class HotelSuiteScreen {
         clearSuiteForm();
     }
 
-    // when hotel is selected in suite form, load its classes
+    // When hotel is selected in the "Add Suite" form, load its classes into suiteClassCombo
     @FXML
     private void handleHotelSelected() {
         try {
@@ -186,6 +190,8 @@ public class HotelSuiteScreen {
         }
     }
 
+    // ── private helpers ──────────────────────────────────────────────────────
+
     private void loadHotels() throws SQLException {
         List<Hotel> hotels = hotelDAO.getAllHotels();
         hotelList = hotels;
@@ -193,11 +199,11 @@ public class HotelSuiteScreen {
     }
 
     private void loadSuiteClasses() throws SQLException {
-        // load all suite classes across all hotels
         List<SuiteClass> allClasses = hotelDAO.getAllSuiteClasses();
         suiteClassTable.setItems(FXCollections.observableArrayList(allClasses));
     }
 
+    /** Populates the hotel combo used in the "Add Suite" form. */
     private void populateHotelCombo() throws SQLException {
         List<Hotel> hotels = hotelDAO.getAllHotels();
         hotelList = hotels;
@@ -206,6 +212,15 @@ public class HotelSuiteScreen {
         suiteHotelCombo.setItems(hotelNames);
     }
 
+    /** Populates the hotel combo used in the "Add Suite Class" form. */
+    private void populateClassHotelCombo() throws SQLException {
+        List<Hotel> hotels = hotelDAO.getAllHotels();
+        ObservableList<String> names = FXCollections.observableArrayList();
+        for (Hotel h : hotels) names.add(h.getHotelId() + " - " + h.getName());
+        classHotelCombo.setItems(names);
+    }
+
+    /** Populates suiteClassCombo based on the hotel selected in suiteHotelCombo. */
     private void populateClassCombo() throws SQLException {
         String selected = suiteHotelCombo.getValue();
         if (selected == null) return;
@@ -235,7 +250,7 @@ public class HotelSuiteScreen {
         classNameField.clear();
         nightlyRateField.clear();
         amenitiesField.clear();
-        classHotelCombo.setValue(null); // add this line
+        classHotelCombo.setValue(null);
     }
 
     private void clearSuiteForm() {
@@ -250,17 +265,12 @@ public class HotelSuiteScreen {
         alert.setContentText(msg);
         alert.showAndWait();
     }
-    private void populateClassHotelCombo() throws SQLException {
-        List<Hotel> hotels = hotelDAO.getAllHotels();
-        ObservableList<String> names = FXCollections.observableArrayList();
-        for (Hotel h : hotels) names.add(h.getHotelId() + " - " + h.getName());
-        classHotelCombo.setItems(names);
-    }
 
-    @FXML private void goGuest() { try { App.showScreen("GuestScreen"); } catch (Exception e) { e.printStackTrace(); } }
+    // ── Navigation ────────────────────────────────────────────────────────────
+    @FXML private void goGuest()       { try { App.showScreen("GuestScreen");       } catch (Exception e) { e.printStackTrace(); } }
     @FXML private void goReservation() { try { App.showScreen("ReservationScreen"); } catch (Exception e) { e.printStackTrace(); } }
-    @FXML private void goCheckout() { try { App.showScreen("CheckoutScreen"); } catch (Exception e) { e.printStackTrace(); } }
-    @FXML private void goHotel() { try { App.showScreen("HotelSuiteScreen"); } catch (Exception e) { e.printStackTrace(); } }
-    @FXML private void goConcierge() { try { App.showScreen("ConciergeScreen"); } catch (Exception e) { e.printStackTrace(); } }
-    @FXML private void goReports() { try { App.showScreen("ReportScreen"); } catch (Exception e) { e.printStackTrace(); } }
+    @FXML private void goCheckout()    { try { App.showScreen("CheckoutScreen");    } catch (Exception e) { e.printStackTrace(); } }
+    @FXML private void goHotelSuite()  { try { App.showScreen("HotelSuiteScreen"); } catch (Exception e) { e.printStackTrace(); } }
+    @FXML private void goConcierge()   { try { App.showScreen("ConciergeScreen");   } catch (Exception e) { e.printStackTrace(); } }
+    @FXML private void goReports()     { try { App.showScreen("ReportScreen");      } catch (Exception e) { e.printStackTrace(); } }
 }

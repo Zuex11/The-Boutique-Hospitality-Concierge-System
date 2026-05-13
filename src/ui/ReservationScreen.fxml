@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -7,13 +8,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.geometry.Insets?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@../Util/AppColors.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ReservationScreen">
     <children>
         <VBox prefHeight="750.0" prefWidth="1100.0" HBox.hgrow="ALWAYS">
@@ -23,7 +22,7 @@
                         <HBox prefHeight="56.0" prefWidth="1100.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
                             <children>
                                 <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR / Concierge System" />
-                                <ScrollPane styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" fitToHeight="true" vbarPolicy="NEVER" hbarPolicy="AS_NEEDED" HBox.hgrow="ALWAYS">
+                                <ScrollPane fitToHeight="true" hbarPolicy="AS_NEEDED" styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                                     <content>
                                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
                                             <children>
@@ -105,11 +104,10 @@
                         <VBox maxWidth="550.0" minWidth="550.0" prefHeight="200.0" prefWidth="550.0" styleClass="right-col" stylesheets="@../Util/AppColors.css">
                      <children>
                         <Label prefHeight="37.0" prefWidth="516.0" styleClass="field-label" stylesheets="@../Util/AppColors.css" text="Available Suites — with Class &amp; Rate (JOIN)" />
-                         <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
-                                     styleClass="reports-scroll" stylesheets="@../Util/AppColors.css">
+                         <ScrollPane fitToWidth="true" prefHeight="0.0" prefWidth="494.0" styleClass="reports-scroll" stylesheets="@../Util/AppColors.css" VBox.vgrow="ALWAYS">
                              <content>
-                                 <FlowPane fx:id="suiteGrid" hgap="10" vgap="10" prefWrapLength="490">
-                                     <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+                                 <FlowPane fx:id="suiteGrid" hgap="10" prefWrapLength="490" vgap="10">
+                                     <padding><Insets bottom="8" left="8" right="8" top="8" /></padding>
                                  </FlowPane>
                              </content>
                          </ScrollPane>
