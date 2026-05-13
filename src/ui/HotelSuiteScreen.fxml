@@ -18,8 +18,8 @@
 
             <HBox prefHeight="56.0" prefWidth="1100.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
                <children>
-                  <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR / Concierge System" />
-                  <ScrollPane styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" fitToHeight="true" vbarPolicy="NEVER" hbarPolicy="AS_NEEDED" HBox.hgrow="ALWAYS">
+                  <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="MIRAGE " />
+                  <ScrollPane fitToHeight="true" hbarPolicy="AS_NEEDED" styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                      <content>
                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">
                            <children>
@@ -99,13 +99,6 @@
                                  <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                                  <children>
                                     <Label styleClass="form-section-title" stylesheets="@../Util/AppColors.css" text="Add Suite Class" />
-                                    <VBox spacing="5.0">
-                                       <children>
-                                          <Label styleClass="field-label" stylesheets="@../Util/AppColors.css" text="HOTEL" />
-                                          <ComboBox fx:id="classHotelCombo" maxWidth="99999.0"
-                                                    styleClass="field-input" stylesheets="@../Util/AppColors.css" />
-                                       </children>
-                                    </VBox>
                                     <HBox spacing="12.0">
                                        <children>
                                           <VBox spacing="5.0" HBox.hgrow="ALWAYS">
@@ -146,7 +139,7 @@
                                     <VBox spacing="5.0">
                                        <children>
                                           <Label styleClass="field-label" stylesheets="@../Util/AppColors.css" text="HOTEL" />
-                                          <ComboBox fx:id="suiteHotelCombo" onAction="#handleHotelSelected" maxWidth="99999.0" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
+                                          <ComboBox fx:id="suiteHotelCombo" maxWidth="99999.0" onAction="#handleHotelSelected" styleClass="field-input" stylesheets="@../Util/AppColors.css" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0">

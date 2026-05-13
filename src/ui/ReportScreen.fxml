@@ -16,7 +16,7 @@
                     <children>
                         <HBox prefHeight="56.0" prefWidth="1100.0" styleClass="top-nav" stylesheets="@../Util/AppColors.css">
                             <children>
-                                <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="VELOUR / Concierge System" />
+                                <Label styleClass="brand-label" stylesheets="@../Util/AppColors.css" text="MIRAGE" />
                                 <ScrollPane fitToHeight="true" hbarPolicy="AS_NEEDED" styleClass="nav-scroll" stylesheets="@../Util/AppColors.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                                     <content>
                                         <HBox styleClass="nav-buttons" stylesheets="@../Util/AppColors.css">

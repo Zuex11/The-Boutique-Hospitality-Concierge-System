@@ -95,17 +95,17 @@ public class ReservationDAO {
 
     public List<Suite> getAvailableSuites() throws SQLException {
         String sql = """
-            SELECT s.suite_id, s.suite_number, s.hotel_id, s.class_id,
-                   h.name AS hotel_name
-            FROM suite s
-            INNER JOIN hotel h ON s.hotel_id = h.hotel_id
-            WHERE s.suite_id NOT IN (
-                SELECT suite_id FROM reservation
-                WHERE check_out >= GETDATE()
-                  AND status != 'cancelled'
-            )
-            ORDER BY h.name, s.suite_number
-        """;
+    SELECT s.suite_id, s.suite_number, s.hotel_id, s.class_id,
+           h.name AS hotel_name,
+           (SELECT MAX(r.check_out) 
+            FROM reservation r 
+            WHERE r.suite_id = s.suite_id 
+              AND r.status != 'cancelled'
+              AND r.check_out >= GETDATE()) AS next_available
+    FROM suite s
+    INNER JOIN hotel h ON s.hotel_id = h.hotel_id
+    ORDER BY h.name, s.suite_number
+    """;
 
         List<Suite> list = new ArrayList<>();
         try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
@@ -116,8 +116,9 @@ public class ReservationDAO {
                         rs.getInt("class_id"),
                         rs.getString("suite_number"));
                 s.setSuiteId(rs.getInt("suite_id"));
-                // ── FIX 2: populate hotel name ──
                 s.setHotelName(rs.getString("hotel_name"));
+                Date na = rs.getDate("next_available");
+                s.setNextAvailable(na != null ? na.toLocalDate() : null);
                 list.add(s);
             }
         }

@@ -14,9 +14,7 @@ public class HotelDAO {
         this.db = DatabaseConnection.getInstance();
     }
 
-    /**
-     * Insert a new hotel
-     */
+
     public void insertHotel(Hotel hotel) throws SQLException {
         String sql = "INSERT INTO hotel (name, theme, location, total_suites) VALUES (?, ?, ?, ?)";
         
@@ -37,9 +35,6 @@ public class HotelDAO {
         }
     }
 
-    /**
-     * Update hotel information
-     */
     public void updateHotel(Hotel hotel) throws SQLException {
         String sql = "UPDATE hotel SET name = ?, theme = ?, location = ?, total_suites = ? WHERE hotel_id = ?";
         
@@ -54,9 +49,7 @@ public class HotelDAO {
         }
     }
 
-    /**
-     * Delete a hotel by ID
-     */
+
     public void deleteHotel(int hotelId) throws SQLException {
         String sql = "DELETE FROM hotel WHERE hotel_id = ?";
         
@@ -66,9 +59,7 @@ public class HotelDAO {
         }
     }
 
-    /**
-     * Get hotel by ID
-     */
+
     public Hotel getHotelById(int hotelId) throws SQLException {
         String sql = "SELECT * FROM hotel WHERE hotel_id = ?";
         
@@ -91,9 +82,7 @@ public class HotelDAO {
         }
     }
 
-    /**
-     * Get all hotels
-     */
+
     public List<Hotel> getAllHotels() throws SQLException {
         String sql = "SELECT * FROM hotel ORDER BY hotel_id";
         List<Hotel> hotels = new ArrayList<>();
@@ -115,9 +104,7 @@ public class HotelDAO {
         return hotels;
     }
 
-    /**
-     * Get hotels by location
-     */
+
     public List<Hotel> getHotelsByLocation(String location) throws SQLException {
         String sql = "SELECT * FROM hotel WHERE location LIKE ? ORDER BY name";
         List<Hotel> hotels = new ArrayList<>();
@@ -140,9 +127,7 @@ public class HotelDAO {
         return hotels;
     }
 
-    /**
-     * Get hotels by theme
-     */
+
     public List<Hotel> getHotelsByTheme(String theme) throws SQLException {
         String sql = "SELECT * FROM hotel WHERE theme = ? ORDER BY name";
         List<Hotel> hotels = new ArrayList<>();
@@ -165,17 +150,14 @@ public class HotelDAO {
         return hotels;
     }
 
-    /**
-     * Get suite classes for a specific hotel (using join)
-     * Covers: Select using joins between hotel and suite_class
-     */
     public List<SuiteClass> getHotelSuiteClasses(int hotelId) throws SQLException {
         String sql = """
-            SELECT sc.class_id, sc.hotel_id, sc.class_name, sc.nightly_rate, sc.amenities
-            FROM suite_class sc
-            WHERE sc.hotel_id = ?
-            ORDER BY sc.nightly_rate
-        """;
+    SELECT DISTINCT sc.class_id, sc.class_name, sc.nightly_rate, sc.amenities
+    FROM suite_class sc
+    JOIN suite s ON s.class_id = sc.class_id
+    WHERE s.hotel_id = ?
+    ORDER BY sc.nightly_rate
+""";
         
         List<SuiteClass> suiteClasses = new ArrayList<>();
         
@@ -185,7 +167,6 @@ public class HotelDAO {
             
             while (rs.next()) {
                 SuiteClass suiteClass = new SuiteClass(
-                    rs.getInt("hotel_id"),
                     rs.getString("class_name"),
                     rs.getDouble("nightly_rate"),
                     rs.getString("amenities")
@@ -197,10 +178,7 @@ public class HotelDAO {
         return suiteClasses;
     }
 
-    /**
-     * Get total number of suites across all hotels (aggregate function)
-     * Covers: Aggregate function (SUM)
-     */
+
     public int getTotalSuitesAcrossAllHotels() throws SQLException {
         String sql = "SELECT SUM(total_suites) as total_suites FROM hotel";
         
@@ -214,10 +192,7 @@ public class HotelDAO {
         }
     }
 
-    /**
-     * Get hotel count by location (aggregate with GROUP BY)
-     * Covers: GROUP BY clause
-     */
+
     public List<Object[]> getHotelCountByLocation() throws SQLException {
         String sql = """
             SELECT location, COUNT(*) as hotel_count, SUM(total_suites) as total_suites
@@ -242,9 +217,7 @@ public class HotelDAO {
         return results;
     }
 
-    /**
-     * Check if hotel exists
-     */
+
     public boolean hotelExists(int hotelId) throws SQLException {
         String sql = "SELECT COUNT(*) FROM hotel WHERE hotel_id = ?";
         
@@ -259,10 +232,7 @@ public class HotelDAO {
         }
     }
 
-    /**
-     * Get hotels with minimum total suites
-     * Covers: Comparison condition
-     */
+
     public List<Hotel> getHotelsWithMinSuites(int minSuites) throws SQLException {
         String sql = "SELECT * FROM hotel WHERE total_suites >= ? ORDER BY total_suites DESC";
         List<Hotel> hotels = new ArrayList<>();
@@ -313,12 +283,11 @@ public class HotelDAO {
         return experiences;
     }
     public void insertSuiteClass(SuiteClass sc) throws SQLException {
-        String sql = "INSERT INTO suite_class (hotel_id, class_name, nightly_rate, amenities) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO suite_class (class_name, nightly_rate, amenities) VALUES (?, ?, ?)";
         PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-        stmt.setInt(1, sc.getHotelId());
-        stmt.setString(2, sc.getClassName());
-        stmt.setDouble(3, sc.getNightlyRate());
-        stmt.setString(4, sc.getAmenities());
+        stmt.setString(1, sc.getClassName());
+        stmt.setDouble(2, sc.getNightlyRate());
+        stmt.setString(3, sc.getAmenities());
         stmt.executeUpdate();
     }
 
@@ -338,7 +307,7 @@ public class HotelDAO {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             SuiteClass sc = new SuiteClass(
-                    rs.getInt("hotel_id"),
+
                     rs.getString("class_name"),
                     rs.getDouble("nightly_rate"),
                     rs.getString("amenities")

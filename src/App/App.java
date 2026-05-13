@@ -13,7 +13,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        stage.setTitle("VELOUR — Concierge System");
+        stage.setTitle("MIRAGE");
         stage.setWidth(1100);
         stage.setHeight(750);
         stage.setResizable(false);
